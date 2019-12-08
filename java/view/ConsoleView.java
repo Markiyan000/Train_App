@@ -15,4 +15,8 @@ public class ConsoleView implements View {
             System.out.println(train);
         }
     }
+
+    public void showBaggageResult(Train train, double baggage) {
+        System.out.println(train.getName() + "has " + baggage + " kilograms of baggage.");
+    }
 }

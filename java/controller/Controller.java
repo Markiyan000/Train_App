@@ -18,6 +18,6 @@ public class Controller {
     public void start() {
         List<Train> trains = model.getTrains();
         Command[] commands = {new CalculationBaggage(trains.get(0)), new ShowTrains(trains)};
-        commands[1].execute();
+        commands[0].execute();
     }
 }

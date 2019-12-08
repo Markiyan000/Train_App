@@ -2,6 +2,8 @@ package controller.command;
 
 import model.model_instance.train.PassengerTrain;
 import model.model_instance.train.Train;
+import view.HTMLView;
+import view.View;
 
 public class CalculationBaggage implements Command{
     Train train;
@@ -13,6 +15,8 @@ public class CalculationBaggage implements Command{
     }
 
     public void execute() {
-        System.out.println(((PassengerTrain) train).calculateBaggage());
+        View view = new HTMLView();
+        double baggage = ((PassengerTrain) train).calculateBaggage();
+        view.showBaggageResult(train, baggage);
     }
 }
