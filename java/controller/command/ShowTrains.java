@@ -1,6 +1,7 @@
 package controller.command;
 
 import model.model_instance.train.Train;
+import view.ConsoleView;
 import view.HTMLView;
 import view.View;
 
@@ -14,7 +15,7 @@ public class ShowTrains implements Command{
     }
 
     public void execute() {
-        View view = new HTMLView();
+        View view = new ConsoleView();
         view.showTrains(trains);
     }
 }

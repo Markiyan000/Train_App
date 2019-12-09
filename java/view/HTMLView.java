@@ -1,5 +1,6 @@
 package view;
 
+import model.model_instance.train.PassengerTrain;
 import model.model_instance.train.Train;
 
 import java.io.FileNotFoundException;
@@ -26,21 +27,39 @@ public class HTMLView implements View {
         return "<h1 align = center>TrainApp</h1>";
     }
 
+    public String startFile() {
+        return "<html><body><b>" + formatTitle() + "</b><br>";
+    }
+
+    public String endFile() {
+        return "</body></html>";
+    }
+
     public void showTrains(List<Train> trains) {
-        String title = String.format("%-1s %10s %10s %15s %20s %15s", "ID", "Type", "Name",
-                "Carriages", "Passengers", "Current");
-        String viewPage = "<html><body>" + "<b>" + formatTitle() + title + "</b><br>";
+        StringBuilder viewPage = new StringBuilder();
+        viewPage.append(startFile());
+        viewPage.append("<table border=1 bordercolor=red width=100 cellpadding=5>");
+        viewPage.append("<tr><th>ID</th><th>Type</th><th>Name</th><th>Carriage</th><th>Passengers</th><th>Current</th></tr>");
         for (Train train : trains) {
-            viewPage += train.toString() + "<br>";
+            viewPage.append("<tr>");
+            viewPage.append("<td>" + train.getID() + "</td>");
+            viewPage.append("<td>" + train.getType() + "</td>");
+            viewPage.append("<td>" + train.getName() + "</td>");
+            viewPage.append("<td>" + train.getNumberCarriages() + "</td>");
+            viewPage.append("<td>" + ((PassengerTrain) train).getNumberPassengers() + "</td>");
+            viewPage.append("<td>" + ((PassengerTrain) train).getCurNumberPassengers() + "</td><br>");
+            viewPage.append("</tr>");
         }
-        viewPage += "</body></html>";
+        viewPage.append(endFile());
         printWriter.println(viewPage);
         printWriter.close();
     }
 
     public void showBaggageResult(Train train, double baggage) {
-        String viewPage = "<html><body>" + "<b>" + formatTitle() + "</b><br>";
-        viewPage += train.getName() + " has " + baggage + " kilograms of baggage.";
+        StringBuilder viewPage = new StringBuilder();
+        viewPage.append(startFile());
+        viewPage.append(train.getName() + " has " + baggage + " kilograms of baggage.");
+        viewPage.append(endFile());
         printWriter.println(viewPage);
         printWriter.close();
     }
