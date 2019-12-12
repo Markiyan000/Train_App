@@ -1,54 +1,71 @@
 package model.model_instance.train;
 
+import model.model_instance.carriage.Carriage;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class PassengerTrain extends Train {
-    private int numberPassengers;
-    private int curNumberPassengers;
-
+    private int maxNumberPassengers;
+    private List<Carriage> carriages;
     public PassengerTrain() {
     }
 
     public PassengerTrain(int ID, String type, String name,
-                          int numberCarriages, int numberPassengers, int curNumberPassengers) {
+                          int numberCarriages, int maxNumberPassengers) {
         super(ID, type, name, numberCarriages);
-        this.numberPassengers = numberPassengers;
-        this.curNumberPassengers = curNumberPassengers;
+        this.maxNumberPassengers = maxNumberPassengers;
+        carriages = new ArrayList<Carriage>();
     }
 
     public int getNumberPassengers() {
-        return numberPassengers;
+        return maxNumberPassengers;
     }
 
-    public void setNumberPassengers(int numberPassengers) {
-        this.numberPassengers = numberPassengers;
+    public void setNumberPassengers(int maxNumberPassengers) {
+        this.maxNumberPassengers = maxNumberPassengers;
     }
 
-    public int getCurNumberPassengers() {
-        return curNumberPassengers;
+    public int getMaxNumberPassengers() {
+        return maxNumberPassengers;
     }
 
-    public void setCurNumberPassengers(int curNumberPassengers) {
-        this.curNumberPassengers = curNumberPassengers;
+    public void setMaxNumberPassengers(int maxNumberPassengers) {
+        this.maxNumberPassengers = maxNumberPassengers;
+    }
+
+    public List<Carriage> getCarriages() {
+        return carriages;
+    }
+
+    public void setCarriages(List<Carriage> carriages) {
+        this.carriages = carriages;
+    }
+
+    public int calculateNumberPassengers(){
+        int passengers = 0;
+        for(Carriage carriage : carriages) {
+            passengers += carriage.getCurNumberPassengers();
+        }
+        return passengers;
     }
 
     public double calculateBaggage() {
-        return curNumberPassengers * new Random().nextInt(20);
+        return calculateNumberPassengers() * new Random().nextInt(30);
     }
 
     @Override
     public PassengerTrain create() {
         Train baseTrain = super.create();
         System.out.print("Enter number of passengers ---> ");
-        int newNumberPassengers = scanner.nextInt();
-        System.out.print("Enter current number of passengers ---> ");
-        int newCurNumberPassengers = scanner.nextInt();
+        int newMaxNumberPassengers = scanner.nextInt();
         return new PassengerTrain(baseTrain.ID, baseTrain.type, baseTrain.name, baseTrain.numberCarriages,
-                newNumberPassengers, newCurNumberPassengers);
+                newMaxNumberPassengers);
     }
 
     @Override
     public String toString() {
-        return super.toString() + String.format("%20d %15d", numberPassengers, curNumberPassengers);
+        return super.toString() + String.format("%20d", maxNumberPassengers);
     }
 }

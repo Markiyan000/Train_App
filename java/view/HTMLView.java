@@ -3,9 +3,13 @@ package view;
 import model.model_instance.train.PassengerTrain;
 import model.model_instance.train.Train;
 
+import java.awt.*;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 public class HTMLView implements View {
@@ -18,6 +22,19 @@ public class HTMLView implements View {
             exception.getMessage();
             exception.printStackTrace();
         } catch (UnsupportedEncodingException exception) {
+            exception.getMessage();
+            exception.printStackTrace();
+        }
+    }
+
+    public void openFile(){
+        try {
+            URI oURL = new URI("file:///C:/Users/marki/IdeaProjects/Train_App/TrainApp.html");
+            Desktop.getDesktop().browse(oURL);
+        }catch(IOException exception){
+            exception.getMessage();
+            exception.printStackTrace();
+        }catch(URISyntaxException exception) {
             exception.getMessage();
             exception.printStackTrace();
         }
@@ -47,11 +64,11 @@ public class HTMLView implements View {
             viewPage.append("<td>" + train.getName() + "</td>");
             viewPage.append("<td>" + train.getNumberCarriages() + "</td>");
             viewPage.append("<td>" + ((PassengerTrain) train).getNumberPassengers() + "</td>");
-            viewPage.append("<td>" + ((PassengerTrain) train).getCurNumberPassengers() + "</td><br>");
             viewPage.append("</tr>");
         }
         viewPage.append(endFile());
         printWriter.println(viewPage);
+        openFile();
         printWriter.close();
     }
 
@@ -61,6 +78,7 @@ public class HTMLView implements View {
         viewPage.append(train.getName() + " has " + baggage + " kilograms of baggage.");
         viewPage.append(endFile());
         printWriter.println(viewPage);
+        openFile();
         printWriter.close();
     }
 }

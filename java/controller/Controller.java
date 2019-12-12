@@ -27,6 +27,6 @@ public class Controller {
         trains.add(new PassengerTrain(3,"Passenger","45",
                 10,145,80));
         Command[] commands = {new CalculationBaggage(trains.get(0)), new ShowTrains(trains)};
-        commands[0].execute();
+        commands[1].execute();
     }
 }

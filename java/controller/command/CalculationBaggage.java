@@ -16,7 +16,7 @@ public class CalculationBaggage implements Command{
     }
 
     public void execute() {
-        View view = new ConsoleView();
+        View view = new HTMLView();
         double baggage = ((PassengerTrain) train).calculateBaggage();
         view.showBaggageResult(train, baggage);
     }

@@ -15,7 +15,7 @@ public class ShowTrains implements Command{
     }
 
     public void execute() {
-        View view = new ConsoleView();
+        View view = new HTMLView();
         view.showTrains(trains);
     }
 }
