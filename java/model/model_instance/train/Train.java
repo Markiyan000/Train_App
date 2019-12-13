@@ -1,23 +1,28 @@
 package model.model_instance.train;
 
+import model.model_instance.Creatable;
+import model.model_instance.data.Route;
+
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Train {
+public class Train implements Creatable, Serializable {
     protected int ID;
     protected String type;
     protected String name;
-    protected int numberCarriages;
-    protected Scanner scanner;
+    protected Route route;
+    protected transient Scanner scanner;
 
     public Train() {
         scanner = new Scanner(System.in);
+        route = new Route();
     }
 
-    public Train(int ID, String type, String name, int numberCarriages) {
+    public Train(int ID, String type, String name,Route route) {
         this.ID = ID;
         this.type = type;
         this.name = name;
-        this.numberCarriages = numberCarriages;
+        this.route = route;
         scanner = new Scanner(System.in);
     }
 
@@ -45,14 +50,19 @@ public class Train {
         this.name = name;
     }
 
-    public int getNumberCarriages() {
-        return numberCarriages;
+    public Route getRoute() { return route; }
+
+    public void setRoute(Route route) { this.route = route; }
+
+    public Scanner getScanner() {
+        return scanner;
     }
 
-    public void setNumberCarriages(int numberCarriages) {
-        this.numberCarriages = numberCarriages;
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
     }
 
+    @Override
     public Train create() {
         System.out.print("Enter ID ---> ");
         int newID = scanner.nextInt();
@@ -61,13 +71,15 @@ public class Train {
         String newType = scanner.nextLine();
         System.out.print("Enter name ---> ");
         String newName = scanner.nextLine();
-        System.out.print("Enter number of carriages ---> ");
-        int newNumberCarriages = scanner.nextInt();
-        return new Train(newID, newType, newName, newNumberCarriages);
+        System.out.println();
+        Route route = new Route().create();
+        System.out.println();
+        return new Train(newID, newType, newName, route);
     }
 
     @Override
     public String toString() {
-        return String.format("%-2d %10s %10s %15d", ID, type, name, numberCarriages);
+        return String.format("%-10d %20s %20s %20s %20s %20s %20s",
+                ID, type, name, route.getFrom(), route.getTo(), route.getTimeStart(), route.getTimeFinish());
     }
 }

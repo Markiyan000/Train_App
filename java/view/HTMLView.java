@@ -52,6 +52,7 @@ public class HTMLView implements View {
         return "</body></html>";
     }
 
+    @Override
     public void showTrains(List<Train> trains) {
         StringBuilder viewPage = new StringBuilder();
         viewPage.append(startFile());
@@ -62,7 +63,6 @@ public class HTMLView implements View {
             viewPage.append("<td>" + train.getID() + "</td>");
             viewPage.append("<td>" + train.getType() + "</td>");
             viewPage.append("<td>" + train.getName() + "</td>");
-            viewPage.append("<td>" + train.getNumberCarriages() + "</td>");
             viewPage.append("<td>" + ((PassengerTrain) train).getNumberPassengers() + "</td>");
             viewPage.append("</tr>");
         }
@@ -72,6 +72,7 @@ public class HTMLView implements View {
         printWriter.close();
     }
 
+    @Override
     public void showBaggageResult(Train train, double baggage) {
         StringBuilder viewPage = new StringBuilder();
         viewPage.append(startFile());

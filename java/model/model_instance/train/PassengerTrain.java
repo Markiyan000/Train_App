@@ -1,6 +1,11 @@
 package model.model_instance.train;
 
+import model.model_instance.Creatable;
 import model.model_instance.carriage.Carriage;
+import model.model_instance.carriage.Compartment;
+import model.model_instance.carriage.Lux;
+import model.model_instance.carriage.Seatpost;
+import model.model_instance.data.Route;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,14 +14,15 @@ import java.util.Random;
 public class PassengerTrain extends Train {
     private int maxNumberPassengers;
     private List<Carriage> carriages;
+
     public PassengerTrain() {
+        carriages = new ArrayList<Carriage>();
     }
 
-    public PassengerTrain(int ID, String type, String name,
-                          int numberCarriages, int maxNumberPassengers) {
-        super(ID, type, name, numberCarriages);
+    public PassengerTrain(int ID, String type, String name, Route route, int maxNumberPassengers, List<Carriage> carriages) {
+        super(ID, type, name, route);
         this.maxNumberPassengers = maxNumberPassengers;
-        carriages = new ArrayList<Carriage>();
+        this.carriages = carriages;
     }
 
     public int getNumberPassengers() {
@@ -43,9 +49,9 @@ public class PassengerTrain extends Train {
         this.carriages = carriages;
     }
 
-    public int calculateNumberPassengers(){
+    public int calculateNumberPassengers() {
         int passengers = 0;
-        for(Carriage carriage : carriages) {
+        for (Carriage carriage : carriages) {
             passengers += carriage.getCurNumberPassengers();
         }
         return passengers;
@@ -57,15 +63,24 @@ public class PassengerTrain extends Train {
 
     @Override
     public PassengerTrain create() {
-        Train baseTrain = super.create();
+        Train base = super.create();
+
         System.out.print("Enter number of passengers ---> ");
         int newMaxNumberPassengers = scanner.nextInt();
-        return new PassengerTrain(baseTrain.ID, baseTrain.type, baseTrain.name, baseTrain.numberCarriages,
-                newMaxNumberPassengers);
-    }
+        System.out.println();
 
-    @Override
-    public String toString() {
-        return super.toString() + String.format("%20d", maxNumberPassengers);
+        Creatable[] creation = {null, new Seatpost(), new Compartment(), new Lux()};
+
+        int key;
+
+        while (true) {
+            System.out.println("Create carriage:\n1) Seatpost\n2) Compartment");
+            key = scanner.nextInt();
+            if (key > creation.length) break;
+            carriages.add((Carriage) creation[key].create());
+        }
+        System.out.println();
+
+        return new PassengerTrain(base.ID, base.type, base.name, base.route, newMaxNumberPassengers, carriages);
     }
 }

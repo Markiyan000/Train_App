@@ -1,13 +1,19 @@
 package model.model_instance.carriage;
 
-import java.util.List;
+import model.model_instance.Creatable;
+
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Carriage {
-    private int ID;
-    private int numberSeats;
-    private int curNumberPassengers;
-    private Scanner scanner;
+public class Carriage implements Creatable, Serializable {
+    protected int ID;
+    protected int numberSeats;
+    protected int curNumberPassengers;
+    protected transient Scanner scanner;
+
+    public Carriage(){
+        scanner = new Scanner(System.in);
+    }
 
     public Carriage(int ID, int numberSeats, int curNumberPassengers) {
         this.ID = ID;
@@ -48,12 +54,13 @@ public class Carriage {
         this.scanner = scanner;
     }
 
+    @Override
     public Carriage create() {
-        System.out.print("Enter ID ---> ");
+        System.out.print("\tEnter ID ---> ");
         int newID = scanner.nextInt();
-        System.out.println("Enter number of seats ---> ");
+        System.out.print("\tEnter number of seats ---> ");
         int newNumberSeats = scanner.nextInt();
-        System.out.print("Enter current number of free seats ---> ");
+        System.out.print("\tEnter current number of free seats ---> ");
         int newCurNumberPassengers = scanner.nextInt();
         return new Carriage(newID, newNumberSeats, newCurNumberPassengers);
     }
