@@ -5,20 +5,21 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Route implements Serializable {
+    private static final long serialVersionUID = 1;
     private String from;
     private String to;
     private String timeStart;
     private String timeFinish;
     private double distance;
-    private HashMap<String, Double> stops;
+    private HashMap<String, Integer> stops;
     private transient Scanner scanner;
 
     public Route() {
-        stops = new HashMap<String, Double>();
+        stops = new HashMap<String, Integer>();
         scanner = new Scanner(System.in);
     }
 
-    public Route(String from, String to, String timeStart, String timeFinish, double distance, HashMap<String, Double> stops) {
+    public Route(String from, String to, String timeStart, String timeFinish, double distance, HashMap<String, Integer> stops) {
         this.from = from;
         this.to = to;
         this.timeStart = timeStart;
@@ -68,11 +69,11 @@ public class Route implements Serializable {
         this.distance = distance;
     }
 
-    public HashMap<String, Double> getStops() {
+    public HashMap<String, Integer> getStops() {
         return stops;
     }
 
-    public void setStops(HashMap<String, Double> stops) {
+    public void setStops(HashMap<String, Integer> stops) {
         this.stops = stops;
     }
 
@@ -97,13 +98,13 @@ public class Route implements Serializable {
         double distance = scanner.nextDouble();
         scanner.nextLine();
         System.out.println("\tCreate stops:");
-        HashMap<String, Double> stops = new HashMap<String, Double>();
+        HashMap<String, Integer> stops = new HashMap<String, Integer>();
         while (true) {
             System.out.print("\t\tEnter name of stop ---> ");
             String nameStop = scanner.nextLine();
             if (nameStop.equals(" ")) break;
             System.out.print("\t\tEnter duration of stop ---> ");
-            double durationStop = scanner.nextDouble();scanner.nextLine();
+            int durationStop = scanner.nextInt();scanner.nextLine();
             stops.put(nameStop, durationStop);
         }
         return new Route(from, to, timeStart, timeFinish, distance, stops);

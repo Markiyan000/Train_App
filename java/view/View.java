@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface View {
     void showTrains(List<Train> trains);
-    void showBaggageResult(Train train, double baggage);
+    void showCalculationResult(Train train, double []result);
 }

@@ -7,15 +7,16 @@ import view.View;
 
 import java.util.List;
 
-public class ShowTrains implements Command{
+public class ShowTrains implements Command {
     List<Train> trains;
+    View view;
 
-    public ShowTrains(List<Train> trains) {
+    public ShowTrains(List<Train> trains, View view) {
         this.trains = trains;
+        this.view = view;
     }
 
     public void execute() {
-        View view = new ConsoleView();
         view.showTrains(trains);
     }
 }

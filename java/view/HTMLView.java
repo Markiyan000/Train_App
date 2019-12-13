@@ -1,6 +1,5 @@
 package view;
 
-import model.model_instance.train.PassengerTrain;
 import model.model_instance.train.Train;
 
 import java.awt.*;
@@ -27,14 +26,14 @@ public class HTMLView implements View {
         }
     }
 
-    public void openFile(){
+    public void openFile() {
         try {
             URI oURL = new URI("file:///C:/Users/marki/IdeaProjects/Train_App/TrainApp.html");
             Desktop.getDesktop().browse(oURL);
-        }catch(IOException exception){
+        } catch (IOException exception) {
             exception.getMessage();
             exception.printStackTrace();
-        }catch(URISyntaxException exception) {
+        } catch (URISyntaxException exception) {
             exception.getMessage();
             exception.printStackTrace();
         }
@@ -133,10 +132,12 @@ public class HTMLView implements View {
     }
 
     @Override
-    public void showBaggageResult(Train train, double baggage) {
+    public void showCalculationResult(Train train, double[] result) {
         StringBuilder viewPage = new StringBuilder();
         viewPage.append(startFile());
-        viewPage.append(train.getName() + " has " + baggage + " kilograms of baggage.");
+        viewPage.append("Train " + train.getName());
+        viewPage.append("The current number of passengers ---> " + (int)result[0]);
+        viewPage.append("The total number of baggage ---> " + result[1]);
         viewPage.append(endFile());
         printWriter.println(viewPage);
         openFile();

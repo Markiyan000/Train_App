@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 public class Carriage implements Creatable, Serializable {
+    private static final long serialVersionUID = 1;
     protected int ID;
     protected int numberSeats;
     protected int curNumberPassengers;

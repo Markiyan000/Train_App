@@ -13,22 +13,19 @@ public class File implements Model {
         try {
             FileInputStream fileInputStream = new FileInputStream("C:\\Users\\marki\\IdeaProjects\\Train_App\\temp.txt");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            Object obj;
-            boolean isExist = true;
             while (true) {
-                obj = (Train) objectInputStream.readObject();
-                if (obj == null) break;
                 if (objectInputStream.available() != 0) break;
-                trains.add((Train) obj);
+                Train train = (Train) objectInputStream.readObject();
+                trains.add(train);
             }
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (EOFException e) {
-            System.out.println(e.getMessage());
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        } catch (ClassNotFoundException exception) {
+            System.out.println(exception.getMessage());
+        } catch (EOFException exception) {
+            System.out.println(exception.getMessage());
+        } catch (FileNotFoundException exception) {
+            System.out.println(exception.getMessage());
+        } catch (IOException exception) {
+            System.out.println(exception.getMessage());
         }
         return trains;
     }

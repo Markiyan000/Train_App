@@ -7,8 +7,8 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 public class Train implements Creatable, Serializable {
+    private static final long serialVersionUID = 1;
     protected int ID;
-    protected String type;
     protected String name;
     protected Route route;
     protected transient Scanner scanner;
@@ -18,9 +18,8 @@ public class Train implements Creatable, Serializable {
         route = new Route();
     }
 
-    public Train(int ID, String type, String name,Route route) {
+    public Train(int ID, String name,Route route) {
         this.ID = ID;
-        this.type = type;
         this.name = name;
         this.route = route;
         scanner = new Scanner(System.in);
@@ -32,14 +31,6 @@ public class Train implements Creatable, Serializable {
 
     public void setID(int ID) {
         this.ID = ID;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getName() {
@@ -62,24 +53,27 @@ public class Train implements Creatable, Serializable {
         this.scanner = scanner;
     }
 
+    public String getType() {
+        if (this instanceof PassengerTrain) return "Passenger";
+        else return "Freight";
+    }
+
     @Override
     public Train create() {
         System.out.print("Enter ID ---> ");
         int newID = scanner.nextInt();
         scanner.nextLine();
-        System.out.print("Enter type ---> ");
-        String newType = scanner.nextLine();
         System.out.print("Enter name ---> ");
         String newName = scanner.nextLine();
         System.out.println();
         Route route = new Route().create();
         System.out.println();
-        return new Train(newID, newType, newName, route);
+        return new Train(newID, newName, route);
     }
 
     @Override
     public String toString() {
         return String.format("%-10d %20s %20s %20s %20s %20s %20s",
-                ID, type, name, route.getFrom(), route.getTo(), route.getTimeStart(), route.getTimeFinish());
+                ID, getType(), name, route.getFrom(), route.getTo(), route.getTimeStart(), route.getTimeFinish());
     }
 }

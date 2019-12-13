@@ -19,26 +19,10 @@ public class PassengerTrain extends Train {
         carriages = new ArrayList<Carriage>();
     }
 
-    public PassengerTrain(int ID, String type, String name, Route route, int maxNumberPassengers, List<Carriage> carriages) {
-        super(ID, type, name, route);
+    public PassengerTrain(int ID, String name, Route route, List<Carriage> carriages) {
+        super(ID, name, route);
         this.maxNumberPassengers = maxNumberPassengers;
         this.carriages = carriages;
-    }
-
-    public int getNumberPassengers() {
-        return maxNumberPassengers;
-    }
-
-    public void setNumberPassengers(int maxNumberPassengers) {
-        this.maxNumberPassengers = maxNumberPassengers;
-    }
-
-    public int getMaxNumberPassengers() {
-        return maxNumberPassengers;
-    }
-
-    public void setMaxNumberPassengers(int maxNumberPassengers) {
-        this.maxNumberPassengers = maxNumberPassengers;
     }
 
     public List<Carriage> getCarriages() {
@@ -49,6 +33,13 @@ public class PassengerTrain extends Train {
         this.carriages = carriages;
     }
 
+    public int getMaxNumberPassengers() {
+        for (Carriage carriage : carriages) {
+            maxNumberPassengers += carriage.getNumberSeats();
+        }
+        return maxNumberPassengers;
+    }
+
     public int calculateNumberPassengers() {
         int passengers = 0;
         for (Carriage carriage : carriages) {
@@ -57,17 +48,17 @@ public class PassengerTrain extends Train {
         return passengers;
     }
 
-    public double calculateBaggage() {
-        return calculateNumberPassengers() * new Random().nextInt(30);
+    public double[] calculateData() {
+        int passengers = calculateNumberPassengers();
+        double [] result = new double[2];
+        result[0] = passengers;
+        result[1] = passengers * new Random().nextInt(30);
+        return result;
     }
 
     @Override
     public PassengerTrain create() {
         Train base = super.create();
-
-        System.out.print("Enter number of passengers ---> ");
-        int newMaxNumberPassengers = scanner.nextInt();
-        System.out.println();
 
         Creatable[] creation = {null, new Seatpost(), new Compartment(), new Lux()};
 
@@ -81,6 +72,6 @@ public class PassengerTrain extends Train {
         }
         System.out.println();
 
-        return new PassengerTrain(base.ID, base.type, base.name, base.route, newMaxNumberPassengers, carriages);
+        return new PassengerTrain(base.ID,base.name, base.route, carriages);
     }
 }
