@@ -8,24 +8,21 @@ import view.View;
 import java.util.List;
 import java.util.Scanner;
 
-public class Calculation implements Command {
+public class ShowTrain implements Command {
     List<Train> trains;
     View view;
     Scanner scanner;
 
-    public Calculation(List<Train> trains, View view) {
+    public ShowTrain(List<Train> trains, View view) {
         this.trains = trains;
         this.view = view;
         scanner = new Scanner(System.in);
     }
 
+    @Override
     public void execute() {
-        System.out.println("Enter train -> ");
         String name = scanner.nextLine();
-
         PassengerTrain train = (PassengerTrain) TrainUtils.findTrain(trains, name);
-
-        double[] result = train.calculateData();
-        view.showCalculationResult(train, result);
+        view.showTrain(train);
     }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 public class ConsoleView implements View {
 
+    @Override
     public void showTrains(List<Train> trains) {
         System.out.println(String.format("%-10s %20s %20s %20s %20s %20s %20s", "ID", "Type", "Name",
                 "From", "To", "Time of start", "Time of finish"));
@@ -18,8 +19,13 @@ public class ConsoleView implements View {
 
     @Override
     public void showCalculationResult(Train train, double[] result) {
-        System.out.println("Train " + train.getName());
-        System.out.println("The current number of passengers ---> " + (int)result[0]);
+        System.out.println("\nTrain  -  " + train.getName());
+        System.out.println("The current number of passengers ---> " + (int) result[0]);
         System.out.println("The total number of baggage ---> " + result[1]);
+    }
+
+    @Override
+    public void showTrain(Train train) {
+        System.out.println(train.infoTrain());
     }
 }

@@ -1,5 +1,7 @@
 package model.model_instance.carriage;
 
+import controller.utils.StringUtils;
+
 public class Seatpost extends Carriage {
     private boolean isConditioner;
 
@@ -29,8 +31,6 @@ public class Seatpost extends Carriage {
 
     @Override
     public String toString() {
-        return super.toString() + "Seatpost{" +
-                "isConditioner=" + isConditioner +
-                '}';
+        return super.toString() + "\tConditioner: " + StringUtils.changeFromBoolean(isConditioner) + "\n";
     }
 }

@@ -12,7 +12,7 @@ public class Carriage implements Creatable, Serializable {
     protected int curNumberPassengers;
     protected transient Scanner scanner;
 
-    public Carriage(){
+    public Carriage() {
         scanner = new Scanner(System.in);
     }
 
@@ -55,18 +55,26 @@ public class Carriage implements Creatable, Serializable {
         this.scanner = scanner;
     }
 
+    public String getType() {
+        if (this instanceof Seatpost) return "Seatpost";
+        if (this instanceof Compartment) return "Compartment";
+        else return "Lux";
+    }
+
     @Override
     public Carriage create() {
         System.out.print("\tEnter ID ---> ");
         int newID = scanner.nextInt();
         System.out.print("\tEnter number of seats ---> ");
         int newNumberSeats = scanner.nextInt();
-        System.out.print("\tEnter current number of free seats ---> ");
+        System.out.print("\tEnter current number of seats ---> ");
         int newCurNumberPassengers = scanner.nextInt();
         return new Carriage(newID, newNumberSeats, newCurNumberPassengers);
     }
 
     public String toString() {
-        return String.format("%10d %10d %10d", ID, numberSeats, curNumberPassengers);
+        return "\tID: " + ID + "\n" +
+                "\tNumber of seats: " + numberSeats + "\n" +
+                "\tCurrent number of seats: " + curNumberPassengers + "\n";
     }
 }

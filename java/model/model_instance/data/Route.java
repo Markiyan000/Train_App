@@ -1,5 +1,7 @@
 package model.model_instance.data;
 
+import com.sun.xml.internal.bind.annotation.OverrideAnnotationOf;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -104,9 +106,20 @@ public class Route implements Serializable {
             String nameStop = scanner.nextLine();
             if (nameStop.equals(" ")) break;
             System.out.print("\t\tEnter duration of stop ---> ");
-            int durationStop = scanner.nextInt();scanner.nextLine();
+            int durationStop = scanner.nextInt();
+            scanner.nextLine();
             stops.put(nameStop, durationStop);
         }
         return new Route(from, to, timeStart, timeFinish, distance, stops);
+    }
+
+    @Override
+    public String toString() {
+        return "\n\tFrom: " + from + "\n" +
+                "\tTo: " + to + "\n" +
+                "\tDeparture: " + timeStart + "\n" +
+                "\tArrival: " + timeFinish + "\n" +
+                "\tDistance: " + distance + "\n" +
+                "\tStops: " + stops + "\n";
     }
 }

@@ -1,15 +1,19 @@
 package view;
 
+import controller.utils.HTMLUtils;
+import controller.utils.StringUtils;
+import model.model_instance.carriage.Carriage;
+import model.model_instance.carriage.Compartment;
+import model.model_instance.carriage.Lux;
+import model.model_instance.carriage.Seatpost;
+import model.model_instance.train.PassengerTrain;
 import model.model_instance.train.Train;
-
-import java.awt.*;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
+import java.lang.String;
 
 public class HTMLView implements View {
     PrintWriter printWriter;
@@ -26,121 +30,86 @@ public class HTMLView implements View {
         }
     }
 
-    public void openFile() {
-        try {
-            URI oURL = new URI("file:///C:/Users/marki/IdeaProjects/Train_App/TrainApp.html");
-            Desktop.getDesktop().browse(oURL);
-        } catch (IOException exception) {
-            exception.getMessage();
-            exception.printStackTrace();
-        } catch (URISyntaxException exception) {
-            exception.getMessage();
-            exception.printStackTrace();
-        }
-    }
-
-    public String styleTable() {
-        return "<head><style>." +
-                "table_blur {\n" +
-                "  background: #f5ffff;\n" +
-                "  border-collapse: collapse;\n" +
-                "  text-align: left;\n" +
-                "}\n" +
-                ".table_blur th {\n" +
-                "  border-top: 1px solid #777777;\t\n" +
-                "  border-bottom: 1px solid #777777; \n" +
-                "  box-shadow: inset 0 1px 0 #999999, inset 0 -1px 0 #999999;\n" +
-                "  background: linear-gradient(#9595b6, #5a567f);\n" +
-                "  color: white;\n" +
-                "  padding: 10px 15px;\n" +
-                "  position: relative;\n" +
-                "}\n" +
-                ".table_blur th:after {\n" +
-                "  content: \"\";\n" +
-                "  display: block;\n" +
-                "  position: absolute;\n" +
-                "  left: 0;\n" +
-                "  top: 25%;\n" +
-                "  height: 25%;\n" +
-                "  width: 100%;\n" +
-                "  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255,255,255,.08));\n" +
-                "}\n" +
-                ".table_blur tr:nth-child(odd) {\n" +
-                "  background: #ebf3f9;\n" +
-                "}\n" +
-                ".table_blur th:first-child {\n" +
-                "  border-left: 1px solid #777777;\t\n" +
-                "  border-bottom:  1px solid #777777;\n" +
-                "  box-shadow: inset 1px 1px 0 #999999, inset 0 -1px 0 #999999;\n" +
-                "}\n" +
-                ".table_blur th:last-child {\n" +
-                "  border-right: 1px solid #777777;\n" +
-                "  border-bottom:  1px solid #777777;\n" +
-                "  box-shadow: inset -1px 1px 0 #999999, inset 0 -1px 0 #999999;\n" +
-                "}\n" +
-                ".table_blur td {\n" +
-                "  border: 1px solid #e3eef7;\n" +
-                "  padding: 10px 15px;\n" +
-                "  position: relative;\n" +
-                "  transition: all 0.5s ease;\n" +
-                "}\n" +
-                ".table_blur tbody:hover td {\n" +
-                "  color: transparent;\n" +
-                "  text-shadow: 0 0 3px #a09f9d;\n" +
-                "}\n" +
-                ".table_blur tbody:hover tr:hover td {\n" +
-                "  color: #444444;\n" +
-                "  text-shadow: none;\n" +
-                "}" +
-                "</style></head>";
-    }
-
-    public String formatTitle() {
-        return "<h1 align = center>TrainApp</h1>";
-    }
-
-    public String startFile() {
-        return "<html>" + styleTable() + "<body><b>" + formatTitle() + "</b><br>";
-    }
-
-    public String endFile() {
-        return "</body></html>";
-    }
-
     @Override
     public void showTrains(List<Train> trains) {
         StringBuilder viewPage = new StringBuilder();
-        viewPage.append(startFile());
-        viewPage.append("<table class=table_blur border=1 width=800  cellpadding=5>");
-        viewPage.append("<tr><th>ID</th><th>Type</th><th>Name</th><th>From</th><th>To</th>" +
-                "<th>Time of start</th><th>Time of finish</th></tr>");
+        String[] title = {"ID", "Type", "Name", "From", "To", "Departure", "Arrival"};
+
+        viewPage.append(HTMLUtils.startFile());
+        viewPage.append(HTMLUtils.titleTable(title) + "</tr>");
         for (Train train : trains) {
-            viewPage.append("<tr>");
-            viewPage.append("<td>" + train.getID() + "</td>");
-            viewPage.append("<td>" + train.getType() + "</td>");
-            viewPage.append("<td>" + train.getName() + "</td>");
-            viewPage.append("<td>" + train.getRoute().getFrom() + "</td>");
-            viewPage.append("<td>" + train.getRoute().getTo() + "</td>");
-            viewPage.append("<td>" + train.getRoute().getTimeStart() + "</td>");
-            viewPage.append("<td>" + train.getRoute().getTimeFinish() + "</td>");
-            viewPage.append("</tr>");
+            String[] data = {String.valueOf(train.getID()), train.getType(), train.getName(), train.getRoute().getFrom(), train.getRoute().getTo(),
+                    train.getRoute().getTimeStart(), train.getRoute().getTimeFinish()};
+            viewPage.append(HTMLUtils.contentsTable(data) + "</tr>");
         }
-        viewPage.append(endFile());
+
+        viewPage.append(HTMLUtils.endFile());
         printWriter.println(viewPage);
-        openFile();
+        HTMLUtils.openFile();
         printWriter.close();
     }
 
     @Override
     public void showCalculationResult(Train train, double[] result) {
         StringBuilder viewPage = new StringBuilder();
-        viewPage.append(startFile());
-        viewPage.append("Train " + train.getName());
-        viewPage.append("The current number of passengers ---> " + (int)result[0]);
-        viewPage.append("The total number of baggage ---> " + result[1]);
-        viewPage.append(endFile());
+        String[] title = {"ID", "Type", "Name", "From", "To", "Departure", "Arrival"};
+        String[] data = {String.valueOf(train.getID()), train.getType(), train.getName(), train.getRoute().getFrom(), train.getRoute().getTo(),
+                train.getRoute().getTimeStart(), train.getRoute().getTimeFinish()};
+
+        viewPage.append(HTMLUtils.startFile());
+        viewPage.append(HTMLUtils.titleTable(title) + "<th>The current number of passengers</th><th>The number of baggage</th>");
+        viewPage.append(HTMLUtils.contentsTable(data) + "<td>" + result[0] + "</td>" + "<td>" + result[1] + "</td>" + "</tr>");
+        viewPage.append(HTMLUtils.endFile());
+
         printWriter.println(viewPage);
-        openFile();
+        HTMLUtils.openFile();
+        printWriter.close();
+    }
+
+    @Override
+    public void showTrain(Train train) {
+        StringBuilder viewPage = new StringBuilder();
+        String[] dataTrain = {String.valueOf(train.getID()), train.getType(), train.getName()};
+        String[] dataRoute = {train.getRoute().getFrom(), train.getRoute().getTo(),
+                train.getRoute().getTimeStart(), train.getRoute().getTimeFinish()};
+        String[] trainTitle = {"ID", "Type", "Name"};
+        String[] carriageTitle = {"ID", "Type", "Number of seats", "Conditioner", "Food", "Press", "TV", "Washstand"};
+        String[] routeTitle = {"From", "To", "Departure", "Arrival"};
+
+        viewPage.append(HTMLUtils.startFile());
+        viewPage.append(HTMLUtils.titleTable(trainTitle) + "</tr>");
+        viewPage.append(HTMLUtils.contentsTable(dataTrain) + "</tr>");
+        viewPage.append(HTMLUtils.titleTable(routeTitle) + "</tr>");
+        viewPage.append(HTMLUtils.contentsTable(dataRoute) + "</tr>");
+        viewPage.append(HTMLUtils.titleTable(carriageTitle) + "</tr>");
+
+        List<Carriage> carriages = ((PassengerTrain) train).getCarriages();
+        for (Carriage carriage : carriages) {
+            List<String> data = new ArrayList<String>();
+            data.add(String.valueOf(carriage.getID()));
+            data.add(carriage.getType());
+            data.add(String.valueOf(carriage.getNumberSeats()));
+            if (carriage instanceof Seatpost) {
+                data.add(StringUtils.changeFromBoolean(((Seatpost) carriage).isConditioner()));
+            }
+            if (carriage instanceof Compartment) {
+                data.add(StringUtils.changeFromBoolean(((Compartment) carriage).isConditioner()));
+                data.add(StringUtils.changeFromBoolean(((Compartment) carriage).isPress()));
+                data.add(StringUtils.changeFromBoolean(((Compartment) carriage).isFood()));
+            }
+            if (carriage instanceof Lux) {
+                data.add(StringUtils.changeFromBoolean(((Lux) carriage).isConditioner()));
+                data.add(StringUtils.changeFromBoolean(((Lux) carriage).isPress()));
+                data.add(StringUtils.changeFromBoolean(((Lux) carriage).isFood()));
+                data.add(StringUtils.changeFromBoolean(((Lux) carriage).isTV()));
+                data.add(StringUtils.changeFromBoolean(((Lux) carriage).isWashStand()));
+            }
+            String[] fromList = data.toArray(new String[data.size()]);
+            viewPage.append(HTMLUtils.contentsTable((fromList)) + "</tr>");
+        }
+        viewPage.append(HTMLUtils.endFile());
+        printWriter.println(viewPage);
+        HTMLUtils.openFile();
         printWriter.close();
     }
 }

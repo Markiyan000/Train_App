@@ -1,8 +1,6 @@
 package model.model_instance.train;
-
 import model.model_instance.Creatable;
 import model.model_instance.data.Route;
-
 import java.io.Serializable;
 import java.util.Scanner;
 
@@ -56,6 +54,12 @@ public class Train implements Creatable, Serializable {
     public String getType() {
         if (this instanceof PassengerTrain) return "Passenger";
         else return "Freight";
+    }
+
+    public String infoTrain() {
+        return "ID: " + ID + "\n" +
+                "Name: " + name + "\n" +
+                "Route: " + route;
     }
 
     @Override

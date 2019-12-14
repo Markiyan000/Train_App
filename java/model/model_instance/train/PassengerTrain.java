@@ -21,8 +21,8 @@ public class PassengerTrain extends Train {
 
     public PassengerTrain(int ID, String name, Route route, List<Carriage> carriages) {
         super(ID, name, route);
-        this.maxNumberPassengers = maxNumberPassengers;
         this.carriages = carriages;
+        this.maxNumberPassengers = getMaxNumberPassengers();
     }
 
     public List<Carriage> getCarriages() {
@@ -54,6 +54,11 @@ public class PassengerTrain extends Train {
         result[0] = passengers;
         result[1] = passengers * new Random().nextInt(30);
         return result;
+    }
+
+    @Override
+    public String infoTrain() {
+        return super.infoTrain() + "Number of passengers: " + maxNumberPassengers + "\n" + "Carriages:\n" + carriages;
     }
 
     @Override

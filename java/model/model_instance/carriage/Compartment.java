@@ -1,11 +1,14 @@
 package model.model_instance.carriage;
 
-public class Compartment extends Carriage {
-    boolean isConditioner;
-    boolean isPress;
-    boolean isFood;
+import controller.utils.StringUtils;
 
-    public Compartment(){}
+public class Compartment extends Carriage {
+   private boolean isConditioner;
+   private boolean isPress;
+   private boolean isFood;
+
+    public Compartment() {
+    }
 
     public Compartment(int ID, int numberSeats, int curNumberPassengers, boolean isConditioner, boolean isPress, boolean isFood) {
         super(ID, numberSeats, curNumberPassengers);
@@ -58,11 +61,10 @@ public class Compartment extends Carriage {
 
     @Override
     public String toString() {
-        return super.toString() + "Compartment{" +
-                "isConditioner=" + isConditioner +
-                ", isPress=" + isPress +
-                ", isFood=" + isFood +
-                '}';
+        return super.toString() +
+                "\tConditioner: " + StringUtils.changeFromBoolean(isConditioner) + "\n" +
+                "\tPress: " + StringUtils.changeFromBoolean(isPress) + "\n" +
+                "\tFood: " + StringUtils.changeFromBoolean(isFood) + "\n";
     }
 }
 
