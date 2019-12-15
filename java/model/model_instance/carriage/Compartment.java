@@ -41,8 +41,14 @@ public class Compartment extends Carriage {
         isFood = food;
     }
 
-    public int levelComfort() {
-        return 1;
+    @Override
+    public int addComfort() {
+        int count = 0;
+        boolean[] values = {isConditioner, isFood, isPress};
+        for (Boolean value : values) {
+            if (value) count++;
+        }
+        return count;
     }
 
     @Override

@@ -1,10 +1,10 @@
 package model.model_instance.data;
 
 import com.sun.xml.internal.bind.annotation.OverrideAnnotationOf;
+import controller.utils.StringUtils;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Route implements Serializable {
     private static final long serialVersionUID = 1;
@@ -13,15 +13,15 @@ public class Route implements Serializable {
     private String timeStart;
     private String timeFinish;
     private double distance;
-    private HashMap<String, Integer> stops;
+    private Map<String, Integer> stops;
     private transient Scanner scanner;
 
     public Route() {
-        stops = new HashMap<String, Integer>();
+        stops = new LinkedHashMap<>();
         scanner = new Scanner(System.in);
     }
 
-    public Route(String from, String to, String timeStart, String timeFinish, double distance, HashMap<String, Integer> stops) {
+    public Route(String from, String to, String timeStart, String timeFinish, double distance, Map<String, Integer> stops) {
         this.from = from;
         this.to = to;
         this.timeStart = timeStart;
@@ -71,11 +71,11 @@ public class Route implements Serializable {
         this.distance = distance;
     }
 
-    public HashMap<String, Integer> getStops() {
+    public Map<String, Integer> getStops() {
         return stops;
     }
 
-    public void setStops(HashMap<String, Integer> stops) {
+    public void setStops(Map<String, Integer> stops) {
         this.stops = stops;
     }
 
@@ -85,6 +85,36 @@ public class Route implements Serializable {
 
     public void setScanner(Scanner scanner) {
         this.scanner = scanner;
+    }
+
+    public int getHourStart(){
+        int []time = StringUtils.splitTime(timeStart);
+        return time[0];
+    }
+
+    public int getMinuteStart(){
+        int []time = StringUtils.splitTime(timeStart);
+        return time[1];
+    }
+
+    public int getCurHour(){
+        return new Date().getHours();
+    }
+
+    public int getCurMinute(){
+        return new Date().getHours();
+    }
+
+    public int remainingHour(){
+        int hourStart = getHourStart();
+        int curHour = getCurHour();
+        if (hourStart > curHour) {
+            return hourStart - curHour;
+        } else return (24 + hourStart) - curHour;
+    }
+
+    public int remainingMinute() {
+        return getMinuteStart() - getCurMinute();
     }
 
     public Route create() {
@@ -100,8 +130,8 @@ public class Route implements Serializable {
         double distance = scanner.nextDouble();
         scanner.nextLine();
         System.out.println("\tCreate stops:");
-        HashMap<String, Integer> stops = new HashMap<String, Integer>();
-        while (true) {
+        Map<String, Integer> stops = new LinkedHashMap<String, Integer>();
+        do {
             System.out.print("\t\tEnter name of stop ---> ");
             String nameStop = scanner.nextLine();
             if (nameStop.equals(" ")) break;
@@ -109,7 +139,7 @@ public class Route implements Serializable {
             int durationStop = scanner.nextInt();
             scanner.nextLine();
             stops.put(nameStop, durationStop);
-        }
+        } while (true);
         return new Route(from, to, timeStart, timeFinish, distance, stops);
     }
 

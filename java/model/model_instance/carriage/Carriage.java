@@ -5,7 +5,7 @@ import model.model_instance.Creatable;
 import java.io.Serializable;
 import java.util.Scanner;
 
-public class Carriage implements Creatable, Serializable {
+public class Carriage implements Creatable, Serializable{
     private static final long serialVersionUID = 1;
     protected int ID;
     protected int numberSeats;
@@ -60,6 +60,14 @@ public class Carriage implements Creatable, Serializable {
         if (this instanceof Compartment) return "Compartment";
         else return "Lux";
     }
+
+    public int levelComfort() {
+        if (this instanceof Seatpost) return 1;
+        if (this instanceof Compartment) return 2;
+        else return 3;
+    }
+
+    public int addComfort(){return 0;}
 
     @Override
     public Carriage create() {

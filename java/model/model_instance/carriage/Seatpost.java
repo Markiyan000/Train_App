@@ -22,6 +22,12 @@ public class Seatpost extends Carriage {
     }
 
     @Override
+    public int addComfort() {
+        if(isConditioner) return 1;
+        return 0;
+    }
+
+    @Override
     public Seatpost create() {
         Carriage base = super.create();
         System.out.print("\tEnter of availability of conditioner ---> ");

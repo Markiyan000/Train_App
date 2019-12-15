@@ -63,6 +63,16 @@ public class Lux extends Carriage {
     }
 
     @Override
+    public int addComfort() {
+        int count = 0;
+        boolean[] values = {isConditioner, isFood, isPress, isTV, isWashStand};
+        for (Boolean value : values) {
+            if (value) count++;
+        }
+        return count;
+    }
+
+    @Override
     public Lux create() {
         Carriage base = super.create();
         System.out.print("\tEnter availability of TV ---> ");
