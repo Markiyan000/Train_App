@@ -24,6 +24,10 @@ public class Calculation implements Command {
         String name = scanner.nextLine();
 
         PassengerTrain train = (PassengerTrain) TrainUtils.findTrain(trains, name);
+        if (train == null) {
+            System.out.println("Train isn't exist!");
+            return;
+        }
 
         double[] result = train.calculateData();
         view.showCalculationResult(train, result);

@@ -7,6 +7,7 @@ import model.model_instance.carriage.Lux;
 import model.model_instance.carriage.Seatpost;
 import model.model_instance.data.Route;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -62,10 +63,10 @@ public class PassengerTrain extends Train{
     }
 
     @Override
-    public PassengerTrain create() {
+    public PassengerTrain create(){
         Train base = super.create();
 
-        Creatable[] creation = {null, new Seatpost(), new Compartment(), new Lux()};
+        Creatable[] creation = {new Seatpost(), new Compartment(), new Lux()};
 
         int key;
 
@@ -73,7 +74,7 @@ public class PassengerTrain extends Train{
             System.out.println("Create carriage:\n1) Seatpost\n2) Compartment");
             key = scanner.nextInt();
             if (key > creation.length) break;
-            carriages.add((Carriage) creation[key].create());
+            carriages.add((Carriage) creation[--key].create());
         }
         System.out.println();
 

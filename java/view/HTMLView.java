@@ -8,9 +8,7 @@ import model.model_instance.carriage.Lux;
 import model.model_instance.carriage.Seatpost;
 import model.model_instance.train.PassengerTrain;
 import model.model_instance.train.Train;
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,20 +18,11 @@ import java.util.Map;
 public class HTMLView implements View {
     PrintWriter printWriter;
 
-    public HTMLView() {
-        try {
-            printWriter = new PrintWriter("TrainApp.html", "UTF-8");
-        } catch (FileNotFoundException exception) {
-            exception.getMessage();
-            exception.printStackTrace();
-        } catch (UnsupportedEncodingException exception) {
-            exception.getMessage();
-            exception.printStackTrace();
-        }
-    }
+    public HTMLView() {}
 
     @Override
     public void showTrains(List<Train> trains) {
+        printWriter = HTMLUtils.createFile();
         StringBuilder viewPage = new StringBuilder();
         String[] title = {"ID", "Type", "Name", "From", "To", "Departure", "Arrival"};
 
@@ -53,6 +42,7 @@ public class HTMLView implements View {
 
     @Override
     public void showCalculationResult(Train train, double[] result) {
+        printWriter = HTMLUtils.createFile();
         StringBuilder viewPage = new StringBuilder();
         String[] title = {"ID", "Type", "Name", "From", "To", "Departure", "Arrival", "Passengers", "Baggage"};
         String[] data = {String.valueOf(train.getID()), train.getType(), train.getName(), train.getRoute().getFrom(), train.getRoute().getTo(),
@@ -70,6 +60,7 @@ public class HTMLView implements View {
 
     @Override
     public void showTrain(Train train) {
+        printWriter = HTMLUtils.createFile();
         StringBuilder viewPage = new StringBuilder();
         String[] trainTitle = {"ID", "Type", "Name"};
         String[] carriageTitle = {"ID", "Type", "Number of seats", "Conditioner", "Food", "Press", "TV", "Washstand"};
@@ -127,6 +118,7 @@ public class HTMLView implements View {
 
     @Override
     public void showFindFreeResult(Train train, Map<Carriage, Integer> found) {
+        printWriter = HTMLUtils.createFile();
         StringBuilder viewPage = new StringBuilder();
         String trainTitle[] = {"ID","Type","Name","From","To","Departure","Arrival"};
         String carriageTitle[] = {"ID","Type","Free seats"};

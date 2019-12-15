@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class FindingFreeSeats implements Command{
+public class FindingFreeSeats implements Command {
     List<Train> trains;
     View view;
     Scanner scanner;
@@ -25,8 +25,16 @@ public class FindingFreeSeats implements Command{
     public void execute() {
         System.out.print("Execute on the train -> ");
         String name = scanner.nextLine();
-        PassengerTrain train = (PassengerTrain) TrainUtils.findTrain(trains,name);
-        Map<Carriage,Integer> found = TrainUtils.findFreeSeats(train);
-        view.showFindFreeResult(train,found);
+        PassengerTrain train = (PassengerTrain) TrainUtils.findTrain(trains, name);
+        if (train == null) {
+            System.out.println("Train isn't exist!");
+            return;
+        }
+        Map<Carriage, Integer> found = TrainUtils.findFreeSeats(train);
+        if (found.isEmpty()) {
+            System.out.println("Not found!");
+            return;
+        }
+        view.showFindFreeResult(train, found);
     }
 }

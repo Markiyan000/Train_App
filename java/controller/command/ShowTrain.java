@@ -23,6 +23,10 @@ public class ShowTrain implements Command {
     public void execute() {
         String name = scanner.nextLine();
         PassengerTrain train = (PassengerTrain) TrainUtils.findTrain(trains, name);
+        if (train == null) {
+            System.out.println("Train isn't exist!");
+            return;
+        }
         view.showTrain(train);
     }
 }

@@ -1,7 +1,10 @@
 package model.model_instance.train;
 import model.model_instance.Creatable;
 import model.model_instance.data.Route;
+
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Train implements Creatable, Serializable {
@@ -63,7 +66,7 @@ public class Train implements Creatable, Serializable {
     }
 
     @Override
-    public Train create() {
+    public Train create() throws InputMismatchException {
         System.out.print("Enter ID ---> ");
         int newID = scanner.nextInt();
         scanner.nextLine();

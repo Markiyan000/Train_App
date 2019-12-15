@@ -2,6 +2,7 @@ package model.model_instance.carriage;
 
 import model.model_instance.Creatable;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Scanner;
 

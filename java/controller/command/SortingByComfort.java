@@ -25,6 +25,10 @@ public class SortingByComfort implements Command {
         System.out.print("Execute on the train -> ");
         String name = scanner.nextLine();
         PassengerTrain train = (PassengerTrain) TrainUtils.findTrain(trains, name);
+        if (train == null) {
+            System.out.println("Train isn't exist!");
+            return;
+        }
         List<Carriage> sorted = TrainUtils.sortByComfort(train.getCarriages());
         train.setCarriages(sorted);
         view.showTrain(train);

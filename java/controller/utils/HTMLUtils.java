@@ -1,11 +1,28 @@
 package controller.utils;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
 public class HTMLUtils {
+
+    public static PrintWriter createFile() {
+        try {
+            return new PrintWriter("TrainApp.html", "UTF-8");
+        } catch (FileNotFoundException exception) {
+            exception.getMessage();
+            exception.printStackTrace();
+        } catch (UnsupportedEncodingException exception) {
+            exception.getMessage();
+            exception.printStackTrace();
+        }
+        return null;
+    }
+
     public static void openFile() {
         try {
             URI oURL = new URI("file:///C:/Users/marki/IdeaProjects/Train_App/TrainApp.html");

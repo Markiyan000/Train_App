@@ -3,6 +3,7 @@ package model.model_instance.data;
 import com.sun.xml.internal.bind.annotation.OverrideAnnotationOf;
 import controller.utils.StringUtils;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 

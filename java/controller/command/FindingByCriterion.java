@@ -27,6 +27,10 @@ public class FindingByCriterion implements Command {
         int from, to;
 
         PassengerTrain train = (PassengerTrain) TrainUtils.findTrain(trains, name);
+        if (train == null) {
+            System.out.println("Train isn't exist!");
+            return;
+        }
         System.out.println("Enter interval:");
         from = scanner.nextInt();
         to = scanner.nextInt();

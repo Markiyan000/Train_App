@@ -1,5 +1,7 @@
 package model.model_instance;
 
+import java.util.InputMismatchException;
+
 public interface Creatable {
-    public Creatable create();
+    Creatable create() throws InputMismatchException;
 }

@@ -23,6 +23,10 @@ public class FindingCity implements Command {
     public void execute() {
         String city = scanner.nextLine();
         List<Train> found = TrainUtils.findCity(trains, city);
+        if (found.isEmpty()) {
+            System.out.println("Not found!");
+            return;
+        }
         view.showTrains(found);
     }
 }
