@@ -36,48 +36,24 @@ public class Route implements Serializable {
         return from;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
     public String getTo() {
         return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
     }
 
     public String getTimeStart() {
         return timeStart;
     }
 
-    public void setTimeStart(String timeStart) {
-        this.timeStart = timeStart;
-    }
-
     public String getTimeFinish() {
         return timeFinish;
-    }
-
-    public void setTimeFinish(String timeFinish) {
-        this.timeFinish = timeFinish;
     }
 
     public double getDistance() {
         return distance;
     }
 
-    public void setDistance(double distance) {
-        this.distance = distance;
-    }
-
     public Map<String, Integer> getStops() {
         return stops;
-    }
-
-    public void setStops(Map<String, Integer> stops) {
-        this.stops = stops;
     }
 
     public Scanner getScanner() {
@@ -103,7 +79,7 @@ public class Route implements Serializable {
     }
 
     public int getCurMinute(){
-        return new Date().getHours();
+        return new Date().getMinutes();
     }
 
     public int remainingHour(){

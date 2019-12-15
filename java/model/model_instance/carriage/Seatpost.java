@@ -17,10 +17,6 @@ public class Seatpost extends Carriage {
         return isConditioner;
     }
 
-    public void setConditioner(boolean conditioner) {
-        isConditioner = conditioner;
-    }
-
     @Override
     public int addComfort() {
         if(isConditioner) return 1;

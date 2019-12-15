@@ -1,9 +1,5 @@
 package controller.command;
 
-import controller.command.sort_commands.Sortable;
-import controller.command.sort_commands.SortingByDistance;
-import controller.command.sort_commands.SortingByPassengers;
-import controller.command.sort_commands.SortingByTime;
 import model.model_instance.train.Train;
 import view.View;
 

@@ -1,5 +1,6 @@
-package controller.command.station_commands;
+package controller.command;
 
+import controller.Controller;
 import controller.command.Command;
 import model.model_instance.train.Train;
 

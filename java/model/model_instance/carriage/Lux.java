@@ -34,32 +34,16 @@ public class Lux extends Carriage {
         return isWashStand;
     }
 
-    public void setWashStand(boolean washStand) {
-        isWashStand = washStand;
-    }
-
     public boolean isPress() {
         return isPress;
-    }
-
-    public void setPress(boolean press) {
-        isPress = press;
     }
 
     public boolean isConditioner() {
         return isConditioner;
     }
 
-    public void setConditioner(boolean conditioner) {
-        isConditioner = conditioner;
-    }
-
     public boolean isFood() {
         return isFood;
-    }
-
-    public void setFood(boolean food) {
-        isFood = food;
     }
 
     @Override

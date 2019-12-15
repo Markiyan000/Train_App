@@ -6,14 +6,11 @@ import model.model_instance.carriage.Compartment;
 import model.model_instance.carriage.Lux;
 import model.model_instance.carriage.Seatpost;
 import model.model_instance.data.Route;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class PassengerTrain extends Train{
-    private int maxNumberPassengers;
     private List<Carriage> carriages;
 
     public PassengerTrain() {
@@ -23,7 +20,6 @@ public class PassengerTrain extends Train{
     public PassengerTrain(int ID, String name, Route route, List<Carriage> carriages) {
         super(ID, name, route);
         this.carriages = carriages;
-        this.maxNumberPassengers = getMaxNumberPassengers();
     }
 
     public List<Carriage> getCarriages() {
@@ -35,6 +31,7 @@ public class PassengerTrain extends Train{
     }
 
     public int getMaxNumberPassengers() {
+        int maxNumberPassengers = 0;
         for (Carriage carriage : carriages) {
             maxNumberPassengers += carriage.getNumberSeats();
         }
@@ -51,15 +48,15 @@ public class PassengerTrain extends Train{
 
     public double[] calculateData() {
         int passengers = calculateNumberPassengers();
-        double [] result = new double[2];
+        double[] result = new double[2];
         result[0] = passengers;
-        result[1] = passengers * new Random().nextInt(30);
+        result[1] = passengers * 15;
         return result;
     }
 
     @Override
     public String infoTrain() {
-        return super.infoTrain() + "Number of passengers: " + maxNumberPassengers + "\n" + "Carriages:\n" + carriages;
+        return super.infoTrain() + "Number of passengers:\n" + "Carriages:\n" + carriages;
     }
 
     @Override

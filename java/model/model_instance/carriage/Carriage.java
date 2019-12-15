@@ -28,24 +28,12 @@ public class Carriage implements Creatable, Serializable{
         return ID;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
     public int getNumberSeats() {
         return numberSeats;
     }
 
-    public void setNumberSeats(int numberSeats) {
-        this.numberSeats = numberSeats;
-    }
-
     public int getCurNumberPassengers() {
         return curNumberPassengers;
-    }
-
-    public void setCurNumberPassengers(int curNumberPassengers) {
-        this.curNumberPassengers = curNumberPassengers;
     }
 
     public Scanner getScanner() {

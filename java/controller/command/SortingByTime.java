@@ -1,5 +1,6 @@
-package controller.command.sort_commands;
+package controller.command;
 
+import controller.command.Sortable;
 import controller.utils.TrainUtils;
 import model.model_instance.train.Train;
 

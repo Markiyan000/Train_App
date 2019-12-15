@@ -1,4 +1,4 @@
-package controller.command.sort_commands;
+package controller.command;
 
 import model.model_instance.train.Train;
 

@@ -30,10 +30,6 @@ public class Train implements Creatable, Serializable {
         return ID;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
     public String getName() {
         return name;
     }
@@ -43,8 +39,6 @@ public class Train implements Creatable, Serializable {
     }
 
     public Route getRoute() { return route; }
-
-    public void setRoute(Route route) { this.route = route; }
 
     public Scanner getScanner() {
         return scanner;

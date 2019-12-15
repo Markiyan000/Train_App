@@ -1,5 +1,6 @@
-package controller.command.station_commands;
+package controller.command;
 
+import controller.Controller;
 import controller.command.Command;
 import model.model_instance.Creatable;
 import model.model_instance.train.FreightTrain;
@@ -30,7 +31,7 @@ public class CreationTrain implements Command {
             trains.add(train);
         }catch(InputMismatchException exception){
             System.out.println(exception.getMessage());
-            //exception.printStackTrace();
+
         }
     }
 }

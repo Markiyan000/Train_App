@@ -21,24 +21,12 @@ public class Compartment extends Carriage {
         return isConditioner;
     }
 
-    public void setConditioner(boolean conditioner) {
-        isConditioner = conditioner;
-    }
-
     public boolean isPress() {
         return isPress;
     }
 
-    public void setPress(boolean press) {
-        isPress = press;
-    }
-
     public boolean isFood() {
         return isFood;
-    }
-
-    public void setFood(boolean food) {
-        isFood = food;
     }
 
     @Override
