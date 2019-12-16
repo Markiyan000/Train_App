@@ -7,7 +7,7 @@ import controller.command.DeletingTrain;
 import model.File;
 import model.Model;
 import model.model_instance.train.Train;
-import view.ConsoleView;
+import view.HTMLView;
 import view.View;
 import view.menu.Menu;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 public class Controller {
     private Model model = new File();
-    private View view = new ConsoleView();
+    private View view = new HTMLView();
 
     public int entry() {
         System.out.println("Log in as:\n1) User\n2) Railway station\n");

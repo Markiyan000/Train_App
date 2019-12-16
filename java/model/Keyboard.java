@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 public class Keyboard implements Model {
 
+    @Override
     public List<Train> getTrains() {
         Scanner scanner = new Scanner(System.in);
         List<Train> trains = new ArrayList<Train>();

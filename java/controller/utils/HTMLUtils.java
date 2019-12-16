@@ -8,8 +8,18 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+
+/**
+ * Class with methods to create HTML page
+ */
+
+
 public class HTMLUtils {
 
+    /**
+     * Method for creating HTML file
+     * @return - created HTML file or null
+     */
     public static PrintWriter createFile() {
         try {
             return new PrintWriter("TrainApp.html", "UTF-8");
@@ -23,6 +33,9 @@ public class HTMLUtils {
         return null;
     }
 
+    /**
+     * Method for opening HTML file while the program is running
+     * */
     public static void openFile() {
         try {
             URI oURL = new URI("file:///C:/Users/marki/IdeaProjects/Train_App/TrainApp.html");
@@ -36,18 +49,35 @@ public class HTMLUtils {
         }
     }
 
+    /**
+     * Method for creating title of page
+     * @return title
+     * */
     public static String formatTitle() {
         return "<h1 align = center>TrainApp</h1>";
     }
 
+    /**
+     * Method for creating body and style tags
+     * @return page header
+     */
     public static String startFile() {
         return "<html>" + styleTable() + "<body><b>" + formatTitle() + "</b><br>";
     }
 
+    /**
+     * Method for closing all main tags
+     * @return two closed tags
+     */
     public static String endFile() {
         return "</body></html>";
     }
 
+    /**
+     * Method for creating title of table
+     * @param titles - content of title
+     * @return - created title of table
+     * */
     public static StringBuilder titleTable(String[] titles) {
         StringBuilder titleTable = new StringBuilder();
         titleTable.append("<table class=table_blur border=1 width=800 cellpadding=5><tr>");
@@ -57,6 +87,11 @@ public class HTMLUtils {
         return titleTable;
     }
 
+    /**
+     * Method for creating title of table
+     * @param data - content of table
+     * @return - created table
+     * */
     public static StringBuilder contentsTable(String[] data) {
         StringBuilder content = new StringBuilder();
         content.append("<tr>");
@@ -66,6 +101,10 @@ public class HTMLUtils {
         return content;
     }
 
+    /**
+     * Method for describing style of table
+     * @return style of table
+     */
     public static String styleTable() {
         return "<head><style>." +
                 "table_blur {\n" +

@@ -2,16 +2,44 @@ package model.model_instance.carriage;
 
 import controller.utils.StringUtils;
 
+
+/**
+ * Class for describing lux carriage
+ */
+
+
 public class Lux extends Carriage {
+    /** Field availability of TV */
     private boolean isTV;
+
+    /** Field availability of washstand */
     private boolean isWashStand;
+
+    /** Field availability of press */
     private boolean isPress;
+
+    /** Field availability of conditioner */
     private boolean isConditioner;
+
+    /** Field availability of food */
     private boolean isFood;
 
-    public Lux() {
-    }
+    /**
+     * Constructor without parameters
+     */
+    public Lux() {}
 
+    /**
+     * Constructor for creating an object with certain values
+     * @param ID - index of carriage
+     * @param numberSeats - number of seats
+     * @param curNumberPassengers - current number of passengers
+     * @param isConditioner - availability of conditioner
+     * @param isPress - availability of press
+     * @param isFood - availability of food
+     * @param isTV - availability of TV
+     * @param isWashStand - availability of washstand
+     */
     public Lux(int ID, int numberSeats, int curNumberPassengers, boolean isTV, boolean isWashStand,
                boolean isPress, boolean isConditioner, boolean isFood) {
         super(ID, numberSeats, curNumberPassengers);
@@ -22,30 +50,50 @@ public class Lux extends Carriage {
         this.isFood = isFood;
     }
 
+    /**
+     * Method of getting TV value
+     * @return true/false (Yes/No)
+     */
     public boolean isTV() {
         return isTV;
     }
 
-    public void setTV(boolean TV) {
-        isTV = TV;
-    }
-
+    /**
+     * Method of getting washstand value
+     * @return true/false (Yes/No)
+     */
     public boolean isWashStand() {
         return isWashStand;
     }
 
+    /**
+     * Method of getting press value
+     * @return true/false (Yes/No)
+     */
     public boolean isPress() {
         return isPress;
     }
 
+    /**
+     * Method of getting conditioner value
+     * @return true/false (Yes/No)
+     */
     public boolean isConditioner() {
         return isConditioner;
     }
 
+    /**
+     * Method of getting food value
+     * @return true/false (Yes/No)
+     */
     public boolean isFood() {
         return isFood;
     }
 
+    /**
+     * Method for calculating additional comfort in carriage
+     * @return number of additional comfort
+     */
     @Override
     public int addComfort() {
         int count = 0;
@@ -56,6 +104,10 @@ public class Lux extends Carriage {
         return count;
     }
 
+    /**
+     * Method for creating new Lux object
+     * @return new object
+     */
     @Override
     public Lux create() {
         Carriage base = super.create();
@@ -73,13 +125,17 @@ public class Lux extends Carriage {
                 isConditioner, isFood);
     }
 
+    /**
+     * Method for string description of object
+     * @return string description of object
+     */
     @Override
     public String toString() {
         return super.toString() +
-                "\tConditioner: " + StringUtils.changeFromBoolean(isConditioner) + "\n" +
-                "\tPress: " + StringUtils.changeFromBoolean(isPress) + "\n" +
-                "\tFood: " + StringUtils.changeFromBoolean(isFood) + "\n" +
-                "\tTV: " + StringUtils.changeFromBoolean(isTV) + "\n" +
-                "\tWashstand: " + StringUtils.changeFromBoolean(isWashStand);
+                "\tConditioner: " + StringUtils.convertBoolean(isConditioner) + "\n" +
+                "\tPress: " + StringUtils.convertBoolean(isPress) + "\n" +
+                "\tFood: " + StringUtils.convertBoolean(isFood) + "\n" +
+                "\tTV: " + StringUtils.convertBoolean(isTV) + "\n" +
+                "\tWashstand: " + StringUtils.convertBoolean(isWashStand);
     }
 }

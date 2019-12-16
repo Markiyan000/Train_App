@@ -8,28 +8,60 @@ import model.model_instance.carriage.Seatpost;
 import model.model_instance.data.Route;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class PassengerTrain extends Train{
+
+/**
+ * Class for describing of passenger train
+ **/
+
+
+public class PassengerTrain extends Train {
+    /**
+     * Field carriages
+     */
     private List<Carriage> carriages;
 
+    /**
+     * Constructor without parameters
+     */
     public PassengerTrain() {
-        carriages = new ArrayList<Carriage>();
+        carriages = new ArrayList<>();
     }
 
+    /**
+     * Constructor for creating new PassengerTrain object
+     *
+     * @param ID        - index of train
+     * @param name      - name of train
+     * @param route     - route
+     * @param carriages - list of carriages
+     */
     public PassengerTrain(int ID, String name, Route route, List<Carriage> carriages) {
         super(ID, name, route);
         this.carriages = carriages;
     }
 
+    /**
+     * Method for getting list of carriages
+     *
+     * @return list of carriages
+     */
     public List<Carriage> getCarriages() {
         return carriages;
     }
 
+    /**
+     * Method for setting list of carriages
+     */
     public void setCarriages(List<Carriage> carriages) {
         this.carriages = carriages;
     }
 
+    /**
+     * Method for calculation a maximal number of passengers int train
+     *
+     * @return a maximal number of passengers
+     **/
     public int getMaxNumberPassengers() {
         int maxNumberPassengers = 0;
         for (Carriage carriage : carriages) {
@@ -38,6 +70,11 @@ public class PassengerTrain extends Train{
         return maxNumberPassengers;
     }
 
+    /**
+     * Method for calculation a current number of passengers
+     *
+     * @return a current number of passengers
+     */
     public int calculateNumberPassengers() {
         int passengers = 0;
         for (Carriage carriage : carriages) {
@@ -46,6 +83,9 @@ public class PassengerTrain extends Train{
         return passengers;
     }
 
+    /**
+     * Method for calculation passengers and baggage in train
+     **/
     public double[] calculateData() {
         int passengers = calculateNumberPassengers();
         double[] result = new double[2];
@@ -54,13 +94,23 @@ public class PassengerTrain extends Train{
         return result;
     }
 
+    /**
+     * Method for an extended description of the train
+     *
+     * @return return extended description of the train
+     */
     @Override
     public String infoTrain() {
-        return super.infoTrain() + "Number of passengers:\n" + "Carriages:\n" + carriages;
+        return super.infoTrain() + "Number of passengers: " + getMaxNumberPassengers() + "\nCarriages:\n" + carriages;
     }
 
+    /**
+     * Method for creating new PassengerTrain object
+     *
+     * @return return new Train object
+     */
     @Override
-    public PassengerTrain create(){
+    public PassengerTrain create() {
         Train base = super.create();
 
         Creatable[] creation = {new Seatpost(), new Compartment(), new Lux()};
@@ -75,6 +125,6 @@ public class PassengerTrain extends Train{
         }
         System.out.println();
 
-        return new PassengerTrain(base.ID,base.name, base.route, carriages);
+        return new PassengerTrain(base.ID, base.name, base.route, carriages);
     }
 }

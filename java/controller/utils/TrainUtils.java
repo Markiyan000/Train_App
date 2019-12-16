@@ -7,7 +7,18 @@ import model.model_instance.train.Train;
 
 import java.util.*;
 
+/**
+ * Class for working with list of trains
+ * */
+
 public class TrainUtils {
+
+    /**
+     * Method for search train in list
+     * @param trains - list of trains
+     * @param name - name of the train you are looking for
+     * @return found train or null
+     */
     public static Train findTrain(List<Train> trains, String name) {
         for (Train train : trains) {
             String currentName = train.getName();
@@ -16,6 +27,11 @@ public class TrainUtils {
         return null;
     }
 
+    /**
+     * Method for sorting carriages in train by comfort level
+     * @param carriages - list of carriages
+     * @return sorted carriages
+     */
     public static List<Carriage> sortByComfort(List<Carriage> carriages) {
         carriages.sort((o1, o2) -> {
             if (o1.levelComfort() == o2.levelComfort())
@@ -25,16 +41,31 @@ public class TrainUtils {
         return carriages;
     }
 
+    /**
+     * Method for sorting trains by distance
+     * @param trains - list of trains
+     * @return sorted trains
+     * */
     public static List<Train> sortByDistance(List<Train> trains) {
         trains.sort((Comparator.comparingInt(o -> (int) o.getRoute().getDistance())));
         return trains;
     }
 
+    /**
+     * Method for sorting trains by number of passengers
+     * @param trains - list of trains
+     * @return sorted trains
+     * */
     public static List<Train> sortByPassengers(List<Train> trains) {
         trains.sort((Comparator.comparingInt(o -> ((PassengerTrain) o).getMaxNumberPassengers())));
         return trains;
     }
 
+    /**
+     * Method for sorting trains by time before departure
+     * @param trains - list of trains
+     * @return sorted trains
+     * */
     public static List<Train> sortByTime(List<Train> trains) {
         trains.sort((o1, o2) -> {
             Route first = o1.getRoute();
@@ -46,6 +77,12 @@ public class TrainUtils {
         return trains;
     }
 
+    /**
+     * Method for search trains that go to the entered city
+     * @param trains - list of trains
+     * @param city - city
+     * @return list of trains
+     * */
     public static List<Train> findCity(List<Train> trains, String city) {
         List<Train> found = new ArrayList<>();
         for (Train train : trains) {

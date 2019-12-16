@@ -93,19 +93,19 @@ public class HTMLView implements View {
             data.add(carriage.getType());
             data.add(String.valueOf(carriage.getNumberSeats()));
             if (carriage instanceof Seatpost) {
-                data.add(StringUtils.changeFromBoolean(((Seatpost) carriage).isConditioner()));
+                data.add(StringUtils.convertBoolean(((Seatpost) carriage).isConditioner()));
             }
             if (carriage instanceof Compartment) {
-                data.add(StringUtils.changeFromBoolean(((Compartment) carriage).isConditioner()));
-                data.add(StringUtils.changeFromBoolean(((Compartment) carriage).isPress()));
-                data.add(StringUtils.changeFromBoolean(((Compartment) carriage).isFood()));
+                data.add(StringUtils.convertBoolean(((Compartment) carriage).isConditioner()));
+                data.add(StringUtils.convertBoolean(((Compartment) carriage).isPress()));
+                data.add(StringUtils.convertBoolean(((Compartment) carriage).isFood()));
             }
             if (carriage instanceof Lux) {
-                data.add(StringUtils.changeFromBoolean(((Lux) carriage).isConditioner()));
-                data.add(StringUtils.changeFromBoolean(((Lux) carriage).isPress()));
-                data.add(StringUtils.changeFromBoolean(((Lux) carriage).isFood()));
-                data.add(StringUtils.changeFromBoolean(((Lux) carriage).isTV()));
-                data.add(StringUtils.changeFromBoolean(((Lux) carriage).isWashStand()));
+                data.add(StringUtils.convertBoolean(((Lux) carriage).isConditioner()));
+                data.add(StringUtils.convertBoolean(((Lux) carriage).isPress()));
+                data.add(StringUtils.convertBoolean(((Lux) carriage).isFood()));
+                data.add(StringUtils.convertBoolean(((Lux) carriage).isTV()));
+                data.add(StringUtils.convertBoolean(((Lux) carriage).isWashStand()));
             }
             String[] fromList = data.toArray(new String[data.size()]);
             viewPage.append(HTMLUtils.contentsTable((fromList)) + "</tr>");
