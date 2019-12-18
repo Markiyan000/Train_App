@@ -67,6 +67,7 @@ public class Train implements Creatable, Serializable {
 
     /**
      * Method for setting field
+     * @param name new name
      */
     public void setName(String name) {
         this.name = name;

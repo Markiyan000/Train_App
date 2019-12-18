@@ -5,6 +5,10 @@ import model.model_instance.train.Train;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Interface for showing result ot user
+ */
+
 public interface View {
     void showTrains(List<Train> trains);
     void showCalculationResult(Train train, double[] result);

@@ -19,6 +19,8 @@ public class DeletingListTrains implements Command {
 
     @Override
     public void execute() {
+        Controller.logger.info("Start of deleting list of trains.");
         trains.clear();
+        Controller.logger.info("End of deleting list of trains!");
     }
 }

@@ -54,6 +54,6 @@ public class FreightTrain extends Train {
      */
     @Override
     public String infoTrain() {
-        return super.toString() + "Number of wagons: " + numberWagons + "\nCargo: " + cargo;
+        return super.toString() + "\nNumber of wagons: " + numberWagons + "\nCargo: " + cargo;
     }
 }

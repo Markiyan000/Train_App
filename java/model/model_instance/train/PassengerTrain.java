@@ -43,7 +43,6 @@ public class PassengerTrain extends Train {
 
     /**
      * Method for getting list of carriages
-     *
      * @return list of carriages
      */
     public List<Carriage> getCarriages() {
@@ -52,6 +51,7 @@ public class PassengerTrain extends Train {
 
     /**
      * Method for setting list of carriages
+     * @param carriages new carriages
      */
     public void setCarriages(List<Carriage> carriages) {
         this.carriages = carriages;
@@ -59,7 +59,6 @@ public class PassengerTrain extends Train {
 
     /**
      * Method for calculation a maximal number of passengers int train
-     *
      * @return a maximal number of passengers
      **/
     public int getMaxNumberPassengers() {
@@ -72,7 +71,6 @@ public class PassengerTrain extends Train {
 
     /**
      * Method for calculation a current number of passengers
-     *
      * @return a current number of passengers
      */
     public int calculateNumberPassengers() {
@@ -85,6 +83,7 @@ public class PassengerTrain extends Train {
 
     /**
      * Method for calculation passengers and baggage in train
+     * @return array with two values (number of passengers and number of baggage)
      **/
     public double[] calculateData() {
         int passengers = calculateNumberPassengers();
@@ -96,7 +95,6 @@ public class PassengerTrain extends Train {
 
     /**
      * Method for an extended description of the train
-     *
      * @return return extended description of the train
      */
     @Override
@@ -106,8 +104,7 @@ public class PassengerTrain extends Train {
 
     /**
      * Method for creating new PassengerTrain object
-     *
-     * @return return new Train object
+     * @return return new PassengerTrain object
      */
     @Override
     public PassengerTrain create() {

@@ -7,7 +7,8 @@ package controller.utils;
 public class StringUtils {
 
     /**
-     * Method for converting boolean value in string value (true -> "Yes",false -> "No")
+     * Method for converting boolean value in string value (true - "Yes",false - "No")
+     * @param value boolean value for converting
      * @return converted value
      */
     public static String convertBoolean(boolean value) {
@@ -16,6 +17,7 @@ public class StringUtils {
 
     /**
      * Method for splitting string and save it in integer array
+     * @param time time is represented as string
      * @return integer array with two values (hour and minute)
      * */
     public static int[] splitTime(String time) {

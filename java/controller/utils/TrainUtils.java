@@ -17,14 +17,14 @@ public class TrainUtils {
      * Method for search train in list
      * @param trains - list of trains
      * @param name - name of the train you are looking for
-     * @return found train or null
+     * @return optional object of train
      */
-    public static Train findTrain(List<Train> trains, String name) {
+    public static Optional<Train> searchTrain(List<Train> trains, String name) {
         for (Train train : trains) {
             String currentName = train.getName();
-            if (name.equals(currentName)) return train;
+            if (name.equals(currentName)) return Optional.of(train);
         }
-        return null;
+        return Optional.empty();
     }
 
     /**
@@ -83,7 +83,7 @@ public class TrainUtils {
      * @param city - city
      * @return list of trains
      * */
-    public static List<Train> findCity(List<Train> trains, String city) {
+    public static List<Train> searchCity(List<Train> trains, String city) {
         List<Train> found = new ArrayList<>();
         for (Train train : trains) {
             String cityFinish = train.getRoute().getTo();
@@ -96,7 +96,12 @@ public class TrainUtils {
         return found;
     }
 
-    public static Map<Carriage, Integer> findFreeSeats(Train train) {
+    /**
+     * Method for search free seats in the train
+     * @param train - where search
+     * @return a map with key(carriage) and value(number of free seats)
+     */
+    public static Map<Carriage, Integer> searchFreeSeats(Train train) {
         Map<Carriage, Integer> found = new HashMap<>();
         List<Carriage> carriages = ((PassengerTrain) train).getCarriages();
         for (Carriage carriage : carriages) {
@@ -107,7 +112,14 @@ public class TrainUtils {
         return found;
     }
 
-    public static List<Carriage> findByCriterion(Train train,int from,int to) {
+    /**
+     * Method for search carriages in the train which have the specifies number of passengers
+     * @param train where search
+     * @param from start of interval
+     * @param to end of interval
+     * @return list of carriages
+     */
+    public static List<Carriage> searchByCriterion(Train train,int from,int to) {
         List<Carriage> found = new ArrayList<>();
         List<Carriage> carriages = ((PassengerTrain) train).getCarriages();
         for (Carriage carriage : carriages) {

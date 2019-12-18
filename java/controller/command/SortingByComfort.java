@@ -7,6 +7,7 @@ import model.model_instance.train.Train;
 import view.View;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class SortingByComfort implements Command {
@@ -24,11 +25,14 @@ public class SortingByComfort implements Command {
     public void execute() {
         System.out.print("Execute on the train -> ");
         String name = scanner.nextLine();
-        PassengerTrain train = (PassengerTrain) TrainUtils.findTrain(trains, name);
-        if (train == null) {
-            System.out.println("Train isn't exist!");
+
+        Optional<Train> optionalTrain = TrainUtils.searchTrain(trains, name);
+        if (!optionalTrain.isPresent()) {
+            System.out.println("Train isn't found!");
             return;
         }
+        PassengerTrain train = (PassengerTrain) optionalTrain.get();
+
         List<Carriage> sorted = TrainUtils.sortByComfort(train.getCarriages());
         train.setCarriages(sorted);
         view.showTrain(train);

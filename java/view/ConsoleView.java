@@ -3,10 +3,13 @@ package view;
 import model.model_instance.carriage.Carriage;
 import model.model_instance.train.Train;
 
-import javax.swing.text.html.HTMLDocument;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+/**
+ * Class for showing result in console
+ * */
 
 public class ConsoleView implements View {
 

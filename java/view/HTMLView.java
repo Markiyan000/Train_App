@@ -15,6 +15,10 @@ import java.util.List;
 import java.lang.String;
 import java.util.Map;
 
+/**
+ * Class for showing result in HTML page
+ */
+
 public class HTMLView implements View {
     PrintWriter printWriter;
 

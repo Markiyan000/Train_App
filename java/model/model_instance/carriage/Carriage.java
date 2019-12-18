@@ -80,6 +80,7 @@ public class Carriage implements Creatable, Serializable {
 
     /**
      * Method for setting field value{@link Carriage#scanner}
+     * @param scanner new scanner
      */
     public void setScanner(Scanner scanner) {
         this.scanner = scanner;
@@ -87,7 +88,6 @@ public class Carriage implements Creatable, Serializable {
 
     /**
      * Method for determining object type
-     *
      * @return return string that describe type of current object
      */
     public String getType() {
@@ -98,6 +98,7 @@ public class Carriage implements Creatable, Serializable {
 
     /**
      * Method for determining comfort level of current object
+     * @return level of comfort
      */
     public int levelComfort() {
         if (this instanceof Seatpost) return 1;

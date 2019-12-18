@@ -120,6 +120,7 @@ public class Route implements Serializable {
 
     /**
      * Method for setting scanner value
+     * @param scanner new scanner
      */
     public void setScanner(Scanner scanner) {
         this.scanner = scanner;
@@ -161,7 +162,7 @@ public class Route implements Serializable {
 
     /**
      * Method for calculation remaining time between hour of departure and current hour
-     * @return a point of departure
+     * @return remaining hour between start and finish
      */
     public int remainingHour(){
         int hourStart = getHourStart();
@@ -173,7 +174,7 @@ public class Route implements Serializable {
 
     /**
      * Method for calculation remaining time between minute of departure and current minute
-     * @return a point of departure
+     * @return remaining minute between start and finish
      */
     public int remainingMinute() {
         return getMinuteStart() - getCurMinute();
