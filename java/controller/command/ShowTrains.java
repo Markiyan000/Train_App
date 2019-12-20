@@ -1,10 +1,8 @@
 package controller.command;
 
+import controller.Controller;
 import model.model_instance.train.Train;
-import view.ConsoleView;
-import view.HTMLView;
 import view.View;
-
 import java.util.List;
 
 public class ShowTrains implements Command {
@@ -17,6 +15,8 @@ public class ShowTrains implements Command {
     }
 
     public void execute() {
+        Controller.logger.info("Start of showing list of trains.");
         view.showTrains(trains);
+        Controller.logger.info("End of showing list of trains.");
     }
 }

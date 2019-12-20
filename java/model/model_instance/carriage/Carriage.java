@@ -2,6 +2,7 @@ package model.model_instance.carriage;
 
 import model.model_instance.Creatable;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -11,30 +12,35 @@ import java.util.Scanner;
 
 
 public class Carriage implements Creatable, Serializable {
-    /** Field serialVersionUID (for correct process of deserialization) */
+    /**
+     * Field serialVersionUID (for correct process of deserialization)
+     */
     private static final long serialVersionUID = 1;
 
-    /** Field ID carriage*/
+    /**
+     * Field ID carriage
+     */
     protected int ID;
 
-    /** Field number of seats */
+    /**
+     * Field number of seats
+     */
     protected int numberSeats;
 
-    /**Field current number of passengers */
+    /**
+     * Field current number of passengers
+     */
     protected int curNumberPassengers;
-
-    /**Field scanner */
-    protected transient Scanner scanner;
 
     /**
      * Constructor without parameters
      */
     public Carriage() {
-        scanner = new Scanner(System.in);
     }
 
     /**
      * Constructor for creating an object with certain values
+     *
      * @param ID                  - carriage index
      * @param numberSeats         - number of seats
      * @param curNumberPassengers - current number of passengers
@@ -43,11 +49,11 @@ public class Carriage implements Creatable, Serializable {
         this.ID = ID;
         this.numberSeats = numberSeats;
         this.curNumberPassengers = curNumberPassengers;
-        scanner = new Scanner(System.in);
     }
 
     /**
      * Method for getting field value{@link Carriage#ID}
+     *
      * @return return value of ID
      */
     public int getID() {
@@ -56,6 +62,7 @@ public class Carriage implements Creatable, Serializable {
 
     /**
      * Method for getting field value{@link Carriage#numberSeats}
+     *
      * @return return value of number of seats
      */
     public int getNumberSeats() {
@@ -64,6 +71,7 @@ public class Carriage implements Creatable, Serializable {
 
     /**
      * Method for getting field value{@link Carriage#curNumberPassengers}
+     *
      * @return return value of current number of passengers
      */
     public int getCurNumberPassengers() {
@@ -71,23 +79,8 @@ public class Carriage implements Creatable, Serializable {
     }
 
     /**
-     * Method for getting field value{@link Carriage#scanner}
-     * @return return value of scanner
-     */
-    public Scanner getScanner() {
-        return scanner;
-    }
-
-    /**
-     * Method for setting field value{@link Carriage#scanner}
-     * @param scanner new scanner
-     */
-    public void setScanner(Scanner scanner) {
-        this.scanner = scanner;
-    }
-
-    /**
      * Method for determining object type
+     *
      * @return return string that describe type of current object
      */
     public String getType() {
@@ -98,6 +91,7 @@ public class Carriage implements Creatable, Serializable {
 
     /**
      * Method for determining comfort level of current object
+     *
      * @return level of comfort
      */
     public int levelComfort() {
@@ -108,18 +102,35 @@ public class Carriage implements Creatable, Serializable {
 
     /**
      * "Abstract" method for determining additional comfort level of current object
+     *
      * @return number of additional comfort
      */
     public int addComfort() {
         return 0;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Carriage carriage = (Carriage) o;
+        return ID == carriage.ID &&
+                numberSeats == carriage.numberSeats &&
+                curNumberPassengers == carriage.curNumberPassengers;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, numberSeats, curNumberPassengers);
+    }
+
     /**
      * Method for creating new object
+     *
      * @return new object
      */
     @Override
-    public Carriage create() {
+    public Carriage create(Scanner scanner) {
         System.out.print("\tEnter ID ---> ");
         int newID = scanner.nextInt();
         System.out.print("\tEnter number of seats ---> ");
@@ -131,6 +142,7 @@ public class Carriage implements Creatable, Serializable {
 
     /**
      * Method for string description of object
+     *
      * @return string description of object
      */
     public String toString() {

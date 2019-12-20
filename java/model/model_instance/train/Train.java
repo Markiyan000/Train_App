@@ -4,6 +4,7 @@ import model.model_instance.Creatable;
 import model.model_instance.data.Route;
 import java.io.Serializable;
 import java.util.InputMismatchException;
+import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -13,44 +14,49 @@ import java.util.Scanner;
 
 
 public class Train implements Creatable, Serializable {
-    /**Field serialized object identifier (for correct process of deserialization)*/
+    /**
+     * Field serialized object identifier (for correct process of deserialization)
+     */
     private static final long serialVersionUID = 1;
 
-    /**Field index of train*/
+    /**
+     * Field index of train
+     */
     protected int ID;
 
-    /**Field name*/
+    /**
+     * Field name
+     */
     protected String name;
 
-    /**Field route*/
+    /**
+     * Field route
+     */
     protected Route route;
-
-    /**Field scanner*/
-    protected transient Scanner scanner;
 
     /**
      * Constructor without parameters
      */
     public Train() {
-        scanner = new Scanner(System.in);
         route = new Route();
     }
 
     /**
      * Constructor for creating new Train object
-     * @param ID - index of train
-     * @param name - name of train
+     *
+     * @param ID    - index of train
+     * @param name  - name of train
      * @param route - route
      */
-    public Train(int ID, String name,Route route) {
+    public Train(int ID, String name, Route route) {
         this.ID = ID;
         this.name = name;
         this.route = route;
-        scanner = new Scanner(System.in);
     }
 
     /**
      * Method for getting ID value
+     *
      * @return return value of ID
      */
     public int getID() {
@@ -59,6 +65,7 @@ public class Train implements Creatable, Serializable {
 
     /**
      * Method for getting name value
+     *
      * @return return value of name
      */
     public String getName() {
@@ -67,6 +74,7 @@ public class Train implements Creatable, Serializable {
 
     /**
      * Method for setting field
+     *
      * @param name new name
      */
     public void setName(String name) {
@@ -75,20 +83,16 @@ public class Train implements Creatable, Serializable {
 
     /**
      * Method for getting stops value
+     *
      * @return return value of stops
      */
-    public Route getRoute() { return route; }
-
-    public Scanner getScanner() {
-        return scanner;
-    }
-
-    public void setScanner(Scanner scanner) {
-        this.scanner = scanner;
+    public Route getRoute() {
+        return route;
     }
 
     /**
      * Method for getting type of train in string format
+     *
      * @return return type of train
      */
     public String getType() {
@@ -98,6 +102,7 @@ public class Train implements Creatable, Serializable {
 
     /**
      * Method for an extended description of the train
+     *
      * @return return extended description of the train
      */
     public String infoTrain() {
@@ -106,25 +111,42 @@ public class Train implements Creatable, Serializable {
                 "Route: " + route;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Train train = (Train) o;
+        return ID == train.ID &&
+                name.equals(train.name) &&
+                route.equals(train.route);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, name, route);
+    }
+
     /**
      * Method for creating new Train object
+     *
      * @return return new Train object
      */
     @Override
-    public Train create() throws InputMismatchException {
+    public Train create(Scanner scanner) throws InputMismatchException {
         System.out.print("Enter ID ---> ");
         int newID = scanner.nextInt();
         scanner.nextLine();
         System.out.print("Enter name ---> ");
         String newName = scanner.nextLine();
         System.out.println();
-        Route route = new Route().create();
+        Route route = new Route().create(scanner);
         System.out.println();
         return new Train(newID, newName, route);
     }
 
     /**
      * Method for string description of object
+     *
      * @return string description of object
      */
     @Override

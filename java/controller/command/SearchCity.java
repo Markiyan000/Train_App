@@ -4,7 +4,6 @@ import controller.Controller;
 import controller.utils.TrainUtils;
 import model.model_instance.train.Train;
 import view.View;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,6 +18,10 @@ public class SearchCity implements Command {
         scanner = new Scanner(System.in);
     }
 
+    public SearchCity(List<Train> trains, Scanner scanner) {
+        this.trains = trains;
+        this.scanner = scanner;
+    }
 
     @Override
     public void execute() {
@@ -34,7 +37,7 @@ public class SearchCity implements Command {
             Controller.logger.info("End of search city.");
             return;
         }
-        Controller.logger.info("Showing results t user.");
+        Controller.logger.info("Showing results to user.");
         view.showTrains(found);
         Controller.logger.info("End of search city.");
     }

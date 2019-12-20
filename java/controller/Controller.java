@@ -4,11 +4,11 @@ import controller.command.*;
 import controller.command.CreationTrain;
 import controller.command.DeletingListTrains;
 import controller.command.DeletingTrain;
-import controller.utils.EmailUtils;
 import model.File;
 import model.Model;
 import model.model_instance.train.Train;
 import org.apache.log4j.Logger;
+import view.ConsoleView;
 import view.HTMLView;
 import view.View;
 import view.menu.Menu;
@@ -22,14 +22,19 @@ import java.util.Scanner;
 
 public class Controller {
     public static final Logger logger = Logger.getLogger("LOGGER");
-    /** Field model (the source of the data that will be processed)*/
+    /**
+     * Field model (the source of the data that will be processed)
+     */
     private Model model = new File();
 
-    /** Field view (showing results to the user)*/
+    /**
+     * Field view (showing results to the user)
+     */
     private View view = new HTMLView();
 
     /**
      * Method for entrance in the program
+     *
      * @return 1/2 (User/Railway station)
      */
     public int entrance() {
@@ -51,9 +56,13 @@ public class Controller {
                 new SortingByComfort(trains, view), new SortingTrains(trains, view)};
         int who = entrance();
         int key;
-        while(true) {
+        while (true) {
             key = Menu.showMenu(who);
-            if(key == 0) break;
+            if (key == 0) break;
+            if ((who == 1 && key < 3) || (who == 2 && key > 3)) {
+                System.out.println("You don't have access!");
+                continue;
+            }
             commands[--key].execute();
         }
     }

@@ -1,6 +1,8 @@
 package model.model_instance.data;
 
 import controller.utils.StringUtils;
+import model.model_instance.Creatable;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -11,46 +13,57 @@ import java.util.*;
 
 
 public class Route implements Serializable {
-    /**Field serialVersionUID (for correct process of deserialization)*/
+    /**
+     * Field serialVersionUID (for correct process of deserialization)
+     */
     private static final long serialVersionUID = 1;
 
-    /** Field a point of departure*/
+    /**
+     * Field a point of departure
+     */
     private String from;
 
-    /**Field a point of arrival*/
+    /**
+     * Field a point of arrival
+     */
     private String to;
 
-    /**Field time of departure*/
+    /**
+     * Field time of departure
+     */
     private String timeStart;
 
-    /**Field time of arrival*/
+    /**
+     * Field time of arrival
+     */
     private String timeFinish;
 
-    /**Field distance*/
+    /**
+     * Field distance
+     */
     private double distance;
 
-    /**Field stops*/
+    /**
+     * Field stops
+     */
     private Map<String, Integer> stops;
-
-    /**Field scanner*/
-    private transient Scanner scanner;
 
     /**
      * Constructor without parameters
-     * */
+     */
     public Route() {
         stops = new LinkedHashMap<>();
-        scanner = new Scanner(System.in);
     }
 
     /**
      * Constructor for creating new object with certain values
-     * @param from - a point of departure
-     * @param to - a point of arrival
-     * @param timeStart - time of departure
+     *
+     * @param from       - a point of departure
+     * @param to         - a point of arrival
+     * @param timeStart  - time of departure
      * @param timeFinish - time of arrival
-     * @param distance - distance between cities
-     * @param stops - stops during cities
+     * @param distance   - distance between cities
+     * @param stops      - stops during cities
      */
     public Route(String from, String to, String timeStart, String timeFinish, double distance, Map<String, Integer> stops) {
         this.from = from;
@@ -59,11 +72,11 @@ public class Route implements Serializable {
         this.timeFinish = timeFinish;
         this.distance = distance;
         this.stops = stops;
-        scanner = new Scanner(System.in);
     }
 
     /**
      * Method for getting a point of departure value
+     *
      * @return a point of departure
      */
     public String getFrom() {
@@ -72,6 +85,7 @@ public class Route implements Serializable {
 
     /**
      * Method for getting a point of arrival value
+     *
      * @return a point of arrival
      */
     public String getTo() {
@@ -80,6 +94,7 @@ public class Route implements Serializable {
 
     /**
      * Method for getting time of departure value
+     *
      * @return time of departure
      */
     public String getTimeStart() {
@@ -88,6 +103,7 @@ public class Route implements Serializable {
 
     /**
      * Method for getting time of arrival value
+     *
      * @return time of arrival
      */
     public String getTimeFinish() {
@@ -96,6 +112,7 @@ public class Route implements Serializable {
 
     /**
      * Method for getting a distance value
+     *
      * @return distance
      */
     public double getDistance() {
@@ -104,6 +121,7 @@ public class Route implements Serializable {
 
     /**
      * Method for getting stops
+     *
      * @return stops
      */
     public Map<String, Integer> getStops() {
@@ -111,80 +129,89 @@ public class Route implements Serializable {
     }
 
     /**
-     * Method for getting scanner
-     * @return scanner
-     */
-    public Scanner getScanner() {
-        return scanner;
-    }
-
-    /**
-     * Method for setting scanner value
-     * @param scanner new scanner
-     */
-    public void setScanner(Scanner scanner) {
-        this.scanner = scanner;
-    }
-
-    /**
      * Method for getting an hour of departure (in integer value)
+     *
      * @return integer value of an hour of departure
      */
-    public int getHourStart(){
-        int []time = StringUtils.splitTime(timeStart);
+    public int getHourStart() {
+        int[] time = StringUtils.splitTime(timeStart);
         return time[0];
     }
 
     /**
      * Method for getting a minute of departure (in integer value)
+     *
      * @return integer value of a minute of departure
      */
-    public int getMinuteStart(){
-        int []time = StringUtils.splitTime(timeStart);
+    public int getMinuteStart() {
+        int[] time = StringUtils.splitTime(timeStart);
         return time[1];
     }
 
     /**
      * Static method of getting current hour
+     *
      * @return current hour
      */
-    public static int getCurHour(){
+    public static int getCurHour() {
         return new Date().getHours();
     }
 
     /**
      * Static method of getting current minute
+     *
      * @return current minute
      */
-    public static int getCurMinute(){
+    public static int getCurMinute() {
         return new Date().getMinutes();
     }
 
     /**
      * Method for calculation remaining time between hour of departure and current hour
+     *
      * @return remaining hour between start and finish
      */
-    public int remainingHour(){
+    public int remainingHour() {
         int hourStart = getHourStart();
         int curHour = getCurHour();
-        if (hourStart > curHour) {
+        if (hourStart >= curHour) {
             return hourStart - curHour;
         } else return (24 + hourStart) - curHour;
     }
 
     /**
      * Method for calculation remaining time between minute of departure and current minute
+     *
      * @return remaining minute between start and finish
      */
     public int remainingMinute() {
         return getMinuteStart() - getCurMinute();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Route route = (Route) o;
+        return Double.compare(route.distance, distance) == 0 &&
+                from.equals(route.from) &&
+                to.equals(route.to) &&
+                timeStart.equals(route.timeStart) &&
+                timeFinish.equals(route.timeFinish) &&
+                stops.equals(route.stops);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(from, to, timeStart, timeFinish, distance, stops);
+    }
+
     /**
      * Method for creating new Route object
+     *
      * @return new Route object
      */
-    public Route create() {
+    public Route create(Scanner scanner) {
         System.out.print("\tEnter start of route ---> ");
         String from = scanner.nextLine();
         System.out.print("\tEnter end of route ---> ");
@@ -203,7 +230,7 @@ public class Route implements Serializable {
             String nameStop = scanner.nextLine();
             if (nameStop.equals(" ")) break;
             System.out.print("\t\tEnter duration of stop ---> ");
-            int durationStop = scanner.nextInt();
+            Integer durationStop = scanner.nextInt();
             scanner.nextLine();
             stops.put(nameStop, durationStop);
         } while (true);
@@ -212,6 +239,7 @@ public class Route implements Serializable {
 
     /**
      * Method for string description of object
+     *
      * @return string description of object
      */
     @Override

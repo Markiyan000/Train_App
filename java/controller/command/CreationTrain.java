@@ -1,13 +1,10 @@
 package controller.command;
 
 import controller.Controller;
-import controller.command.Command;
 import model.model_instance.Creatable;
 import model.model_instance.train.FreightTrain;
 import model.model_instance.train.PassengerTrain;
 import model.model_instance.train.Train;
-
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -30,12 +27,11 @@ public class CreationTrain implements Command {
         int key = scanner.nextInt();
         try {
             Controller.logger.warn("Start of process creation! A error is possible!");
-            Train train = (Train) creation[key].create();
+            Train train = (Train) creation[key].create(new Scanner(System.in));
             Controller.logger.info("Adding train to list.");
             trains.add(train);
         } catch (InputMismatchException exception) {
             Controller.logger.error("ERROR while creation train!", exception);
-            System.out.println(exception.getMessage());
         }
         Controller.logger.info("End of creation train.");
     }

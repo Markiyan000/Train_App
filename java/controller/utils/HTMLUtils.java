@@ -1,5 +1,6 @@
 package controller.utils;
 
+import controller.Controller;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,47 +19,52 @@ public class HTMLUtils {
 
     /**
      * Method for creating HTML file
+     *
      * @return - created HTML file or null
      */
     public static PrintWriter createFile() {
+        Controller.logger.info("Creation HTML file.");
         try {
             return new PrintWriter("TrainApp.html", "UTF-8");
         } catch (FileNotFoundException exception) {
+            Controller.logger.error("ERROR!!! File isn't found!", exception);
             exception.getMessage();
-            exception.printStackTrace();
         } catch (UnsupportedEncodingException exception) {
+            Controller.logger.error("ERROR!!! Encoding problems!", exception);
             exception.getMessage();
-            exception.printStackTrace();
         }
         return null;
     }
 
     /**
      * Method for opening HTML file while the program is running
-     * */
+     */
     public static void openFile() {
+        Controller.logger.info("Open HTML file for user.");
         try {
             URI oURL = new URI("file:///C:/Users/marki/IdeaProjects/Train_App/TrainApp.html");
             Desktop.getDesktop().browse(oURL);
         } catch (IOException exception) {
+            Controller.logger.error("ERROR while opening file!!!", exception);
             exception.getMessage();
-            exception.printStackTrace();
         } catch (URISyntaxException exception) {
+            Controller.logger.error("ERROR while opening file!!!", exception);
             exception.getMessage();
-            exception.printStackTrace();
         }
     }
 
     /**
      * Method for creating title of page
+     *
      * @return title
-     * */
+     */
     public static String formatTitle() {
         return "<h1 align = center>TrainApp</h1>";
     }
 
     /**
      * Method for creating body and style tags
+     *
      * @return page header
      */
     public static String startFile() {
@@ -67,6 +73,7 @@ public class HTMLUtils {
 
     /**
      * Method for closing all main tags
+     *
      * @return two closed tags
      */
     public static String endFile() {
@@ -75,9 +82,10 @@ public class HTMLUtils {
 
     /**
      * Method for creating title of table
+     *
      * @param titles - content of title
      * @return - created title of table
-     * */
+     */
     public static StringBuilder titleTable(String[] titles) {
         StringBuilder titleTable = new StringBuilder();
         titleTable.append("<table class=table_blur border=1 width=800 cellpadding=5><tr>");
@@ -89,9 +97,10 @@ public class HTMLUtils {
 
     /**
      * Method for creating title of table
+     *
      * @param data - content of table
      * @return - created table
-     * */
+     */
     public static StringBuilder contentsTable(String[] data) {
         StringBuilder content = new StringBuilder();
         content.append("<tr>");
@@ -103,6 +112,7 @@ public class HTMLUtils {
 
     /**
      * Method for describing style of table
+     *
      * @return style of table
      */
     public static String styleTable() {

@@ -5,7 +5,6 @@ import controller.utils.TrainUtils;
 import model.model_instance.train.PassengerTrain;
 import model.model_instance.train.Train;
 import view.View;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -23,7 +22,7 @@ public class Calculation implements Command {
 
     public void execute() {
         Controller.logger.info("Start of calculation passengers and baggage.");
-        System.out.println("Enter train -> ");
+        System.out.print("Enter train -> ");
         Controller.logger.warn("Enter a train name! An error is possible!");
         String name = scanner.nextLine();
         Controller.logger.info("Search a train.");

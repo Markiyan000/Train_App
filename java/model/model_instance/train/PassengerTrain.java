@@ -8,6 +8,8 @@ import model.model_instance.carriage.Seatpost;
 import model.model_instance.data.Route;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 
 /**
@@ -43,6 +45,7 @@ public class PassengerTrain extends Train {
 
     /**
      * Method for getting list of carriages
+     *
      * @return list of carriages
      */
     public List<Carriage> getCarriages() {
@@ -51,6 +54,7 @@ public class PassengerTrain extends Train {
 
     /**
      * Method for setting list of carriages
+     *
      * @param carriages new carriages
      */
     public void setCarriages(List<Carriage> carriages) {
@@ -59,6 +63,7 @@ public class PassengerTrain extends Train {
 
     /**
      * Method for calculation a maximal number of passengers int train
+     *
      * @return a maximal number of passengers
      **/
     public int getMaxNumberPassengers() {
@@ -71,6 +76,7 @@ public class PassengerTrain extends Train {
 
     /**
      * Method for calculation a current number of passengers
+     *
      * @return a current number of passengers
      */
     public int calculateNumberPassengers() {
@@ -83,6 +89,7 @@ public class PassengerTrain extends Train {
 
     /**
      * Method for calculation passengers and baggage in train
+     *
      * @return array with two values (number of passengers and number of baggage)
      **/
     public double[] calculateData() {
@@ -93,8 +100,23 @@ public class PassengerTrain extends Train {
         return result;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        PassengerTrain train = (PassengerTrain) o;
+        return carriages.equals(train.carriages);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), carriages);
+    }
+
     /**
      * Method for an extended description of the train
+     *
      * @return return extended description of the train
      */
     @Override
@@ -104,24 +126,21 @@ public class PassengerTrain extends Train {
 
     /**
      * Method for creating new PassengerTrain object
+     *
      * @return return new PassengerTrain object
      */
     @Override
-    public PassengerTrain create() {
-        Train base = super.create();
-
+    public PassengerTrain create(Scanner scanner) {
+        Train base = super.create(scanner);
         Creatable[] creation = {new Seatpost(), new Compartment(), new Lux()};
-
         int key;
-
         while (true) {
-            System.out.println("Create carriage:\n1) Seatpost\n2) Compartment");
+            System.out.println("Create carriage:\n1) Seatpost\n2) Compartment\n3) Lux \n>3) Exit\n");
             key = scanner.nextInt();
-            if (key > creation.length) break;
-            carriages.add((Carriage) creation[--key].create());
+            if (key > 3) break;
+            carriages.add((Carriage) creation[--key].create(scanner));
         }
         System.out.println();
-
         return new PassengerTrain(base.ID, base.name, base.route, carriages);
     }
 }

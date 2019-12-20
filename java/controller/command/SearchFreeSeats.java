@@ -6,7 +6,6 @@ import model.model_instance.carriage.Carriage;
 import model.model_instance.train.PassengerTrain;
 import model.model_instance.train.Train;
 import view.View;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;

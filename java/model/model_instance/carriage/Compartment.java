@@ -2,6 +2,9 @@ package model.model_instance.carriage;
 
 import controller.utils.StringUtils;
 
+import java.util.Objects;
+import java.util.Scanner;
+
 
 /**
  * Class for describing compartment carriage
@@ -9,28 +12,36 @@ import controller.utils.StringUtils;
 
 
 public class Compartment extends Carriage {
-   /** Field availability of conditioner */
-   private boolean isConditioner;
+    /**
+     * Field availability of conditioner
+     */
+    private boolean isConditioner;
 
-    /** Field availability of press */
+    /**
+     * Field availability of press
+     */
     private boolean isPress;
 
-    /** Field availability of food */
+    /**
+     * Field availability of food
+     */
     private boolean isFood;
 
     /**
      * Constructor without parameters
      */
-    public Compartment() {}
+    public Compartment() {
+    }
 
     /**
      * Constructor for creating an object with certain values
-     * @param ID - index of carriage
-     * @param numberSeats - number of seats
+     *
+     * @param ID                  - index of carriage
+     * @param numberSeats         - number of seats
      * @param curNumberPassengers - current number of passengers
-     * @param isConditioner - availability of conditioner
-     * @param isPress - availability of press
-     * @param isFood - availability of food
+     * @param isConditioner       - availability of conditioner
+     * @param isPress             - availability of press
+     * @param isFood              - availability of food
      */
     public Compartment(int ID, int numberSeats, int curNumberPassengers, boolean isConditioner, boolean isPress, boolean isFood) {
         super(ID, numberSeats, curNumberPassengers);
@@ -41,6 +52,7 @@ public class Compartment extends Carriage {
 
     /**
      * Method of getting conditioner value
+     *
      * @return true/false (Yes/No)
      */
     public boolean isConditioner() {
@@ -49,6 +61,7 @@ public class Compartment extends Carriage {
 
     /**
      * Method of getting press value
+     *
      * @return true/false (Yes/No)
      */
     public boolean isPress() {
@@ -57,6 +70,7 @@ public class Compartment extends Carriage {
 
     /**
      * Method of getting food value
+     *
      * @return true/false (Yes/No)
      */
     public boolean isFood() {
@@ -65,6 +79,7 @@ public class Compartment extends Carriage {
 
     /**
      * Method for calculating additional comfort in carriage
+     *
      * @return number of additional comfort
      */
     @Override
@@ -77,13 +92,30 @@ public class Compartment extends Carriage {
         return count;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Compartment that = (Compartment) o;
+        return isConditioner == that.isConditioner &&
+                isPress == that.isPress &&
+                isFood == that.isFood;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), isConditioner, isPress, isFood);
+    }
+
     /**
      * Method for creating new Compartment object
+     *
      * @return new object
      */
     @Override
-    public Compartment create() {
-        Carriage base = super.create();
+    public Compartment create(Scanner scanner) {
+        Carriage base = super.create(scanner);
 
         System.out.print("\tEnter availability of conditioner ---> ");
         boolean isConditioner = scanner.nextBoolean();
@@ -97,6 +129,7 @@ public class Compartment extends Carriage {
 
     /**
      * Method for string description of object
+     *
      * @return string description of object
      */
     @Override

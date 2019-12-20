@@ -1,7 +1,6 @@
 package controller.command;
 
 import model.model_instance.train.Train;
-
 import java.util.List;
 
 public interface Sortable {

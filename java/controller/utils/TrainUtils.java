@@ -4,7 +4,6 @@ import model.model_instance.carriage.Carriage;
 import model.model_instance.data.Route;
 import model.model_instance.train.PassengerTrain;
 import model.model_instance.train.Train;
-
 import java.util.*;
 
 /**
@@ -15,8 +14,9 @@ public class TrainUtils {
 
     /**
      * Method for search train in list
+     *
      * @param trains - list of trains
-     * @param name - name of the train you are looking for
+     * @param name   - name of the train you are looking for
      * @return optional object of train
      */
     public static Optional<Train> searchTrain(List<Train> trains, String name) {
@@ -29,6 +29,7 @@ public class TrainUtils {
 
     /**
      * Method for sorting carriages in train by comfort level
+     *
      * @param carriages - list of carriages
      * @return sorted carriages
      */
@@ -43,9 +44,10 @@ public class TrainUtils {
 
     /**
      * Method for sorting trains by distance
+     *
      * @param trains - list of trains
      * @return sorted trains
-     * */
+     */
     public static List<Train> sortByDistance(List<Train> trains) {
         trains.sort((Comparator.comparingInt(o -> (int) o.getRoute().getDistance())));
         return trains;
@@ -53,9 +55,10 @@ public class TrainUtils {
 
     /**
      * Method for sorting trains by number of passengers
+     *
      * @param trains - list of trains
      * @return sorted trains
-     * */
+     */
     public static List<Train> sortByPassengers(List<Train> trains) {
         trains.sort((Comparator.comparingInt(o -> ((PassengerTrain) o).getMaxNumberPassengers())));
         return trains;
@@ -63,9 +66,10 @@ public class TrainUtils {
 
     /**
      * Method for sorting trains by time before departure
+     *
      * @param trains - list of trains
      * @return sorted trains
-     * */
+     */
     public static List<Train> sortByTime(List<Train> trains) {
         trains.sort((o1, o2) -> {
             Route first = o1.getRoute();
@@ -79,10 +83,11 @@ public class TrainUtils {
 
     /**
      * Method for search trains that go to the entered city
+     *
      * @param trains - list of trains
-     * @param city - city
+     * @param city   - city
      * @return list of trains
-     * */
+     */
     public static List<Train> searchCity(List<Train> trains, String city) {
         List<Train> found = new ArrayList<>();
         for (Train train : trains) {
@@ -98,6 +103,7 @@ public class TrainUtils {
 
     /**
      * Method for search free seats in the train
+     *
      * @param train - where search
      * @return a map with key(carriage) and value(number of free seats)
      */
@@ -114,12 +120,13 @@ public class TrainUtils {
 
     /**
      * Method for search carriages in the train which have the specifies number of passengers
+     *
      * @param train where search
-     * @param from start of interval
-     * @param to end of interval
+     * @param from  start of interval
+     * @param to    end of interval
      * @return list of carriages
      */
-    public static List<Carriage> searchByCriterion(Train train,int from,int to) {
+    public static List<Carriage> searchByCriterion(Train train, int from, int to) {
         List<Carriage> found = new ArrayList<>();
         List<Carriage> carriages = ((PassengerTrain) train).getCarriages();
         for (Carriage carriage : carriages) {

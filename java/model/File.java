@@ -1,6 +1,7 @@
 package model;
 
 import controller.Controller;
+import controller.utils.EmailUtils;
 import model.model_instance.train.Train;
 
 import java.io.*;
@@ -14,26 +15,24 @@ public class File implements Model {
         Controller.logger.info("Reading initial data from a file.");
         List<Train> trains = new ArrayList<Train>();
         try {
-            FileInputStream fileInputStream = new FileInputStream("C:\\Users\\marki\\IdeaProjects\\Train_App\\source_data.txt");
+            FileInputStream fileInputStream = new FileInputStream("C:\\Users\\mrki\\IdeaProjects\\Train_App\\source_data.txt");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             while (true) {
-                if (objectInputStream.available() != 0) break;
-                Train train = (Train) objectInputStream.readObject();
-                Controller.logger.info("Adding train to list.");
-                trains.add(train);
+                Train train;
+                while ((train = (Train) objectInputStream.readObject()) != null) {
+                    Controller.logger.info("Adding train to list.");
+                    trains.add(train);
+                }
             }
         } catch (ClassNotFoundException exception) {
             Controller.logger.error("ERROR while reading from a file!", exception);
-            System.out.println(exception.getMessage());
         } catch (EOFException exception) {
-            Controller.logger.error("ERROR while reading from a file!", exception);
-            System.out.println(exception.getMessage());
+            Controller.logger.error("File ended!", exception);
         } catch (FileNotFoundException exception) {
             Controller.logger.fatal("FATAL ERROR while reading from a file! File isn't found!", exception);
-            System.out.println(exception.getMessage());
+            EmailUtils.send();
         } catch (IOException exception) {
             Controller.logger.error("ERROR while reading from a file!", exception);
-            System.out.println(exception.getMessage());
         }
         Controller.logger.info("End of function 'getTrains' (in File)");
         return trains;

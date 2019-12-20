@@ -22,7 +22,8 @@ import java.util.Map;
 public class HTMLView implements View {
     PrintWriter printWriter;
 
-    public HTMLView() {}
+    public HTMLView() {
+    }
 
     @Override
     public void showTrains(List<Train> trains) {
@@ -69,7 +70,7 @@ public class HTMLView implements View {
         String[] trainTitle = {"ID", "Type", "Name"};
         String[] carriageTitle = {"ID", "Type", "Number of seats", "Conditioner", "Food", "Press", "TV", "Washstand"};
         String[] routeTitle = {"From", "To", "Departure", "Arrival"};
-        String[] stopsTitle = {"Name","Duration"};
+        String[] stopsTitle = {"Name", "Duration"};
         String[] dataTrain = {String.valueOf(train.getID()), train.getType(), train.getName()};
         String[] dataRoute = {train.getRoute().getFrom(), train.getRoute().getTo(),
                 train.getRoute().getTimeStart(), train.getRoute().getTimeFinish()};
@@ -80,8 +81,8 @@ public class HTMLView implements View {
         viewPage.append(HTMLUtils.titleTable(routeTitle) + "</tr>");
         viewPage.append(HTMLUtils.contentsTable(dataRoute) + "</tr>");
         viewPage.append(HTMLUtils.titleTable(stopsTitle));
-        Iterator<Map.Entry<String,Integer>> entryIterator = train.getRoute().getStops().entrySet().iterator();
-        while(entryIterator.hasNext()) {
+        Iterator<Map.Entry<String, Integer>> entryIterator = train.getRoute().getStops().entrySet().iterator();
+        while (entryIterator.hasNext()) {
             List<String> dataStop = new ArrayList<>();
             Map.Entry<String, Integer> current = entryIterator.next();
             dataStop.add(current.getKey());
@@ -124,9 +125,9 @@ public class HTMLView implements View {
     public void showFindFreeResult(Train train, Map<Carriage, Integer> found) {
         printWriter = HTMLUtils.createFile();
         StringBuilder viewPage = new StringBuilder();
-        String trainTitle[] = {"ID","Type","Name","From","To","Departure","Arrival"};
-        String carriageTitle[] = {"ID","Type","Free seats"};
-        String []dataTrain = {String.valueOf(train.getID()), train.getType(), train.getName(), train.getRoute().getFrom(), train.getRoute().getTo(),
+        String trainTitle[] = {"ID", "Type", "Name", "From", "To", "Departure", "Arrival"};
+        String carriageTitle[] = {"ID", "Type", "Free seats"};
+        String[] dataTrain = {String.valueOf(train.getID()), train.getType(), train.getName(), train.getRoute().getFrom(), train.getRoute().getTo(),
                 train.getRoute().getTimeStart(), train.getRoute().getTimeFinish()};
         viewPage.append((HTMLUtils.startFile()));
         viewPage.append(HTMLUtils.titleTable(trainTitle));

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Keyboard implements Model {
+    Scanner scanner = new Scanner(System.in);
 
     @Override
     public List<Train> getTrains() {
@@ -24,16 +25,14 @@ public class Keyboard implements Model {
         int key;
         while (true) {
             Controller.logger.info("Choosing type of train.");
-            System.out.println("Passenger/Freight (1/2)");
+            System.out.println("Passenger / Freight / Exit ( 1 / 2 / >2 )");
             key = scanner.nextInt();
             if (key > creation.length) break;
             try {
                 Controller.logger.info("Adding train to list.");
-                trains.add((Train) creation[key].create());
+                trains.add((Train) creation[key].create(scanner));
             } catch (InputMismatchException exception) {
                 Controller.logger.error("ERROR while creating train!", exception);
-                System.out.println(exception.getMessage());
-                exception.printStackTrace();
             }
         }
         Controller.logger.info("End of function 'getTrains' (in Keyboard)");

@@ -1,10 +1,8 @@
 package controller.command;
 
 import controller.Controller;
-import controller.command.Command;
 import controller.utils.TrainUtils;
 import model.model_instance.train.Train;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -16,6 +14,11 @@ public class DeletingTrain implements Command {
     public DeletingTrain(List<Train> trains) {
         this.trains = trains;
         scanner = new Scanner(System.in);
+    }
+
+    public DeletingTrain(List<Train> trains, Scanner scanner) {
+        this.trains = trains;
+        this.scanner = scanner;
     }
 
     @Override

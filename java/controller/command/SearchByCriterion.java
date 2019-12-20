@@ -5,9 +5,7 @@ import controller.utils.TrainUtils;
 import model.model_instance.carriage.Carriage;
 import model.model_instance.train.PassengerTrain;
 import model.model_instance.train.Train;
-import org.apache.log4j.Logger;
 import view.View;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -16,6 +14,7 @@ public class SearchByCriterion implements Command {
     List<Train> trains;
     View view;
     Scanner scanner;
+
 
     public SearchByCriterion(List<Train> trains, View view) {
         this.trains = trains;
@@ -27,7 +26,7 @@ public class SearchByCriterion implements Command {
     public void execute() {
         Controller.logger.info("Start of search by criterion.");
         System.out.print("Execute on the train -> ");
-        Controller.logger.warn("Enter a train name! A error is possible!");
+        Controller.logger.warn("Enter a train name! An error is possible!");
         String name = scanner.nextLine();
         Controller.logger.info("Search train.");
         Optional<Train> optionalTrain = TrainUtils.searchTrain(trains, name);

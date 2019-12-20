@@ -1,7 +1,6 @@
 package controller.utils;
 
 import java.util.Properties;
-
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -18,11 +17,11 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 public class EmailUtils {
-    public static void send() {
+    public static boolean send() {
         String to = "markiyan07345@gmail.com";
         String from = "markiyan07345@gmail.com";
         final String username = "markiyan07345@gmail.com";
-        final String password = "Derevetskyimarkiyan010720010";
+        final String password = "***************************";
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -53,7 +52,8 @@ public class EmailUtils {
             message.setContent(multipart);
             Transport.send(message);
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
+        return true;
     }
 }
